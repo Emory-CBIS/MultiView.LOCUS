@@ -1,4 +1,4 @@
-# MultiView.LOCUS A Low-Rank, Sparse Blind Source Separation for Multi-View Brain Connectome.
+# MultiView.LOCUS:  A Low-Rank, Sparse Blind Source Separation for Multi-View Brain Connectome.
 
 `MultiView.LOCUS` is an R package implementing a Low-Rank, Sparse Blind Source Separation framework designed for analyzing Multi-View brain connectivity data. The approach decompose the Multi-View brain connectivity data in to both shared and unique connectivity trait sources across views, addressing challenges inherent in brain connectome analyses such as high dimensionality and noise, providing interpretable and powerful insights into neurodevelopmental and neuropsychiatric studies.
 
