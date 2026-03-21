@@ -78,9 +78,9 @@ multi_view_decomposition(Y, q, q_common, V, MaxIteration=5000, penalty="SCAD", p
 ```
 
 #### Arguments
-- Y: A list of length K (number of views), where each element is an 𝑛×𝑝 matrix of group-level brain connectivity data for a view.
+- Y: A list of length K (number of views), where each element is an $n\times p$ matrix of group-level brain connectivity data for a view.
 Each row corresponds to a subject, and each column corresponds to an edge in the connectivity network.
-To construct each matrix in Y from subject-level adjacency matrices (size V×V), use the Ltrans() function to vectorize the upper-triangular elements (excluding the diagonal).
+To construct each matrix in \bm{Y} from subject-level adjacency matrices (size V×V), use the Ltrans() function to vectorize the upper-triangular elements (excluding the diagonal).
 
 - q: A vector of integers of length K. Specifies the number of view-specific connectivity traits to extract for each view.
 
@@ -123,17 +123,15 @@ Tolerance for convergence based on the change in the source traits.
 
 #### Output
 
-- `A`: A list of length K. Each element is an \(n \times (q_k + q_{\text{common}})\) mixing matrix for a view, where \(q_k\) is the number of view-specific traits for that view. The columns represent subject-level loading coefficients corresponding to both view-specific and shared connectivity traits.
+- `A`: A list of length K. Each element is the final estimated mixing matrix for a view after back-transformation by the corresponding preprocessing matrix inverse. The rows correspond to subjects, and the columns correspond to the estimated shared and view-specific subnetworks.
 
-- `S`: A list of length K. Each element contains the estimated source trait matrix for a view. It includes both the view-specific connectivity traits and the shared connectivity traits across views. Each row corresponds to one latent connectivity trait, and each column corresponds to an edge in the vectorized brain network.
+- `S`: A list of length K. Each element is the final estimated component matrix for a view. It contains the latent subnetworks extracted from that modality, including both shared (first q) and view-specific components.
 
-- `S_specific`: A list of length K. Each element contains the estimated view-specific connectivity traits for that view only.
+- `S_sparse`: A list of length K. Each element is the sparsity-thresholded version of the estimated component matrix for debug only.
 
-- `S_common`: A list of length K. Each element contains the estimated shared connectivity traits for that view. These traits are intended to capture connectivity patterns that are aligned across all views.
+- `theta_common`: A list of length K. Each element contains the estimated parameter objects associated with the shared subnetworks for that view.
 
-- `rank_specific`: A vector of length K. Gives the estimated low-rank dimension for the view-specific trait structure in each view.
-
-- `rank_common`: An integer. Gives the estimated low-rank dimension for the shared trait structure across views.
+- `theta_spe`: A list of length K. Each element contains the estimated parameter objects associated with the view-specific subnetworks for that view.
 
 
 ### 2. BIC_cal function
