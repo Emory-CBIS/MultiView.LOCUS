@@ -142,7 +142,7 @@ calculate_bic(Y, model)
 
 - Y: 	A list of original input matrices for each view. Each element should be an 𝑁×𝑝 matrix, where N is the number of subjects and p is the number of connectivity edges (vectorized upper triangle).
 
--model: The result list returned by multi_view_decomposition(), containing fitted mixing matrices (A) and source matrices (S) for each view.
+- model: The result list returned by multi_view_decomposition(), containing fitted mixing matrices (A) and source matrices (S) for each view.
 
 `BIC_cal` function serves as a valuable guide for tuning the parameters $\phi$ and $\psi$.  The function outputs a single BIC value.  A model with lower BIC value is prefered. However, it is worth noting that in certain datasets, the choice may not be straightforward solely based on BIC. Tuning parameters can also be selected based on visual inspection of the extracted connectivity traits to achieve the desired level of sparsity and appealing neuroscience interpretation.
 
