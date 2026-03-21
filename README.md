@@ -77,7 +77,7 @@ multi_view_decomposition(Y, q, q_common, V, MaxIteration=5000, penalty="SCAD", p
                   espli1=5e-4, espli2=5e-4, rho=0.95, silent=FALSE)
 ```
 
-Arguments
+#### Arguments
 - Y: A list of length K (number of views), where each element is an 𝑛×𝑝 matrix of group-level brain connectivity data for a view.
 Each row corresponds to a subject, and each column corresponds to an edge in the connectivity network.
 To construct each matrix in Y from subject-level adjacency matrices (size V×V), use the Ltrans() function to vectorize the upper-triangular elements (excluding the diagonal).
@@ -120,6 +120,20 @@ Tolerance for convergence based on the change in the source traits.
 - rho: A numeric value between 0 and 1 (default = 0.95).  A threshold parameter for determining the low-rank structure of the source traits. A higher rho encourages capturing more variance (leading to a higher rank).
 
 - silent: Logical (TRUE or FALSE, default = FALSE). If FALSE, progress messages are printed during model fitting.
+
+#### Output
+
+- `A`: A list of length K. Each element is an \(n \times (q_k + q_{\text{common}})\) mixing matrix for a view, where \(q_k\) is the number of view-specific traits for that view. The columns represent subject-level loading coefficients corresponding to both view-specific and shared connectivity traits.
+
+- `S`: A list of length K. Each element contains the estimated source trait matrix for a view. It includes both the view-specific connectivity traits and the shared connectivity traits across views. Each row corresponds to one latent connectivity trait, and each column corresponds to an edge in the vectorized brain network.
+
+- `S_specific`: A list of length K. Each element contains the estimated view-specific connectivity traits for that view only.
+
+- `S_common`: A list of length K. Each element contains the estimated shared connectivity traits for that view. These traits are intended to capture connectivity patterns that are aligned across all views.
+
+- `rank_specific`: A vector of length K. Gives the estimated low-rank dimension for the view-specific trait structure in each view.
+
+- `rank_common`: An integer. Gives the estimated low-rank dimension for the shared trait structure across views.
 
 
 ### 2. BIC_cal function
