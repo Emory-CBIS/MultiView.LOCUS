@@ -1,0 +1,411 @@
+---
+title: "MultiView.LOCUS Analysis for Three Simulation Datasets"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+### The Rmd File is self-contained, no need to download data files separately. 
+
+## Install the package
+
+```{r setup, include=T}
+if (!requireNamespace("devtools", quietly = TRUE))
+  install.packages("devtools")
+if (!requireNamespace("MultiView.LOCUS", quietly = TRUE)) {
+  devtools::install_github("Emory-CBIS/MultiView.LOCUS")
+}# Additional packages used in this report
+for (pkg in c("lattice", "gridExtra", "grid")) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, repos = "https://cloud.r-project.org")
+  }
+}
+
+library(MultiView.LOCUS)
+library(lattice)
+library(gridExtra)
+library(grid)
+```
+
+## (1) Helper functions - hidden
+
+**Functions for plotting and parameter selections**
+
+```{r helper-functions, include=FALSE}
+plot_mat <- function(mat, limits = 5) {
+  mat[mat > limits] <- limits
+  mat[mat < -limits] <- -limits
+  levelplot(
+    mat,
+    col.regions = colorRampPalette(c("blue", "white", "red")),
+    at = do.breaks(c(-limits, limits), 100),
+    scales = list(x = list(at = NULL), y = list(at = NULL), tck = c(0, 0)),
+    xlab = "", ylab = ""
+  )
+}
+
+plot_conn_wrapper <- function(vec, V) {
+  mat <- Ltrinv(vec, V, d = FALSE)
+  plot_conn(mat)
+}
+
+plot_mat_component <- function(res, view_idx, k, V, scale = 6, limits = 5) {
+  vec <- res$S[[view_idx]][k, ]
+  if (max(abs(vec)) == 0) {
+    return(plot_mat(Ltrinv(vec, V, FALSE), limits = limits))
+  }
+  plot_mat(scale * Ltrinv(vec / max(abs(vec)), V, FALSE), limits = limits)
+}
+
+visualize_plot_mat_grid <- function(res, V, q_common, q_specific, scale = 6, limits = 5) {
+  n_total <- q_common + q_specific
+
+  view1 <- lapply(seq_len(n_total), function(k) {
+    grid::grid.grabExpr(print(plot_mat_component(res, 1, k, V, scale, limits), newpage = FALSE))
+  })
+  view2 <- lapply(seq_len(n_total), function(k) {
+    grid::grid.grabExpr(print(plot_mat_component(res, 2, k, V, scale, limits), newpage = FALSE))
+  })
+
+  plot_list <- c(view1, view2)
+  col_titles <- c(paste0("Common ", seq_len(q_common)),
+                  paste0("Specific ", seq_len(q_specific)))
+  col_grobs <- lapply(col_titles, function(title) {
+    textGrob(title, gp = gpar(fontsize = 11, fontface = "bold"))
+  })
+
+  row_grobs <- lapply(c("View 1", "View 2"), function(title) {
+    textGrob(title, rot = 90, gp = gpar(fontsize = 12, fontface = "bold"))
+  })
+
+  plot_grid <- arrangeGrob(grobs = plot_list, nrow = 2, ncol = n_total)
+  arrangeGrob(
+    plot_grid,
+    left = arrangeGrob(grobs = row_grobs, ncol = 1),
+    bottom = arrangeGrob(grobs = col_grobs, nrow = 1),
+    padding = unit(2, "lines")
+  )
+}
+
+visualize_common_specific <- function(res, V, q_common, q_specific) {
+  n_total <- q_common + q_specific
+  plot_list <- vector("list", length = n_total * 2)
+
+  for (i in seq_len(n_total)) {
+    plot_list[[i]] <- plot_conn_wrapper((res$S[[1]][i, ])*10, V)
+  }
+  for (i in seq_len(n_total)) {
+    plot_list[[n_total + i]] <- plot_conn_wrapper((res$S[[2]][i, ])*10, V)
+  }
+
+  col_titles <- c(paste0("Common ", seq_len(q_common)),
+                  paste0("Specific ", seq_len(q_specific)))
+  col_grobs <- lapply(col_titles, function(title) {
+    textGrob(title, gp = gpar(fontsize = 11, fontface = "bold"))
+  })
+
+  row_grobs <- lapply(c("View 1", "View 2"), function(title) {
+    textGrob(title, rot = 90, gp = gpar(fontsize = 12, fontface = "bold"))
+  })
+
+  plot_grid <- arrangeGrob(grobs = plot_list, nrow = 2, ncol = n_total)
+  arrangeGrob(
+    plot_grid,
+    left = arrangeGrob(grobs = row_grobs, ncol = 1),
+    bottom = arrangeGrob(grobs = col_grobs, nrow = 1),
+    padding = unit(2, "lines")
+  )
+}
+
+compute_bic_grid <- function(Data_x, Data_y, q_common, q, V,
+                             gamma, rho, espli1, espli2,
+                             phi_seq = seq(1, 3, by = 0.5),
+                             psi_seq = seq(0.1, 1, by = 0.3),
+                             penalty = "SCAD") {
+  BIC_matrix <- matrix(
+    NA,
+    nrow = length(phi_seq),
+    ncol = length(psi_seq),
+    dimnames = list(paste0("phi=", phi_seq), paste0("psi=", psi_seq))
+  )
+
+  for (i in seq_along(phi_seq)) {
+    for (j in seq_along(psi_seq)) {
+      cat("Running phi =", phi_seq[i], "and psi =", psi_seq[j], "\n")
+
+      score <- tryCatch({
+        result_bic <- multi_view_decomposition(
+          Y = list(Data_x, Data_y),
+          q_common = q_common,
+          q = q,
+          V = V,
+          penalty = penalty,
+          phi = phi_seq[i],
+          psi = psi_seq[j],
+          gamma = gamma,
+          rho = rho,
+          espli1 = espli1,
+          espli2 = espli2,
+          MaxIteration = 500,
+          silent = TRUE
+        )
+
+        bic_values <- calculate_bic(Y = list(Data_x, Data_y), res = result_bic)
+        if (!all(is.finite(bic_values))) {
+          NA_real_
+        } else {
+          sum(bic_values)
+        }
+      }, error = function(e) {
+        NA_real_
+      })
+
+      BIC_matrix[i, j] <- score
+    }
+  }
+
+  if (all(is.na(BIC_matrix))) {
+    optimal_phi <- NA_real_
+    optimal_psi <- NA_real_
+  } else {
+    optimal_indices <- which(BIC_matrix == min(BIC_matrix, na.rm = TRUE), arr.ind = TRUE)
+    optimal_phi <- phi_seq[optimal_indices[1]]
+    optimal_psi <- psi_seq[optimal_indices[2]]
+  }
+
+  list(
+    BIC_matrix = BIC_matrix,
+    phi_seq = phi_seq,
+    psi_seq = psi_seq,
+    optimal_phi = optimal_phi,
+    optimal_psi = optimal_psi
+  )
+}
+```
+
+## (2) Data Loading
+
+This report runs the same tuning + final model workflow for:
+
+- **simu_1**: `Data_x_simu1.rds` + `Data_y_simu1.rds`
+- **simu_2**: `Data_x_simu2.rds` + `Data_y_simu2.rds`
+- **simu_3**: `Data_x.rds` + `Data_y.rds`
+
+```{r load-data}
+load_rds_from_sources <- function(filename,
+                                  package = "MultiView.LOCUS",
+                                  urls = character(0),
+                                  local_fallback = character(0)) {
+  # 1) Installed package extdata
+  pkg_file <- system.file("extdata", filename, package = package)
+  if (nzchar(pkg_file) && file.exists(pkg_file)) {
+    return(readRDS(pkg_file))
+  }
+
+  # 2) URL(s)
+  for (u in urls) {
+    obj <- tryCatch({
+      con <- url(u, open = "rb")
+      on.exit(close(con), add = TRUE)
+      readRDS(con)
+    }, error = function(e) NULL)
+
+    if (!is.null(obj)) {
+      return(obj)
+    }
+  }
+
+  # 3) Local fallback path(s)
+  for (p in local_fallback) {
+    if (file.exists(p)) {
+      return(readRDS(p))
+    }
+  }
+
+  stop("Could not load ", filename,
+       " from package extdata, URL, or local fallback paths.")
+}
+
+repo_raw <- "https://raw.githubusercontent.com/Emory-CBIS/MultiView.LOCUS/main"
+
+sim_data <- list(
+  simu_1 = list(
+    Data_x = load_rds_from_sources(
+      "Data_x_simu1.rds",
+      urls = c(file.path(repo_raw, "inst/extdata/Data_x_simu1.rds")),
+      local_fallback = c("example_data/Data_x_simu1.rds")
+    ),
+    Data_y = load_rds_from_sources(
+      "Data_y_simu1.rds",
+      urls = c(file.path(repo_raw, "inst/extdata/Data_y_simu1.rds")),
+      local_fallback = c("example_data/Data_y_simu1.rds")
+    )
+  ),
+  simu_2 = list(
+    Data_x = load_rds_from_sources(
+      "Data_x_simu2.rds",
+      urls = c(file.path(repo_raw, "inst/extdata/Data_x_simu2.rds")),
+      local_fallback = c("example_data/Data_x_simu2.rds")
+    ),
+    Data_y = load_rds_from_sources(
+      "Data_y_simu2.rds",
+      urls = c(file.path(repo_raw, "inst/extdata/Data_y_simu2.rds")),
+      local_fallback = c("example_data/Data_y_simu2.rds")
+    )
+  ),
+  simu_3 = list(
+    Data_x = load_rds_from_sources(
+      "Data_x.rds",
+      urls = c(file.path(repo_raw, "example_data/Data_x.rds")),
+      local_fallback = c("example_data/Data_x.rds")
+    ),
+    Data_y = load_rds_from_sources(
+      "Data_y.rds",
+      urls = c(file.path(repo_raw, "example_data/Data_y.rds")),
+      local_fallback = c("example_data/Data_y.rds")
+    )
+  )
+)
+
+sim_data <- lapply(sim_data, function(d) {
+  d$Data <- list(d$Data_x, d$Data_y)
+  d
+})
+
+lapply(sim_data, function(d) c(dim(d$Data_x), dim(d$Data_y)))
+```
+
+
+# Simulation Study 1 (`simu_1`) — tune phi/psi then final result
+
+```{r simu1-tune,warning=FALSE}
+Data_x <- sim_data$simu_1$Data_x
+Data_y <- sim_data$simu_1$Data_y
+Data <- list(Data_x, Data_y)
+
+simu_1_tuning <- compute_bic_grid(
+  Data_x = Data_x,
+  Data_y = Data_y,
+  q_common = 3,
+  q = c(2, 2),
+  V = 50,
+  gamma = 3,
+  rho = 0.95,
+  espli1 = 1e-3,
+  espli2 = 1e-3,
+  phi_seq = seq(1, 3, by = 0.5),
+  psi_seq = seq(0.1, 1, by = 0.3)
+)
+
+simu_1_tuning$BIC_matrix
+simu_1_tuning$optimal_phi
+simu_1_tuning$optimal_psi
+```
+
+```{r simu1-final}
+simu_1_res <- multi_view_decomposition(
+  Y = Data,
+  q = c(2, 2),
+  q_common = 3,
+  V = 50,
+  penalty = "SCAD",
+  phi = simu_1_tuning$optimal_phi,
+  psi = simu_1_tuning$optimal_psi,
+  gamma = 3,
+  rho = 0.95,
+  espli1 = 1e-3,
+  espli2 = 1e-3,
+  MaxIteration = 500,
+  silent =T
+)
+
+```
+
+```{r simu1-visual, fig.width=16, fig.height=7}
+# simu_1 uses plot_mat-based grid: components 1-3 are common, 4-5 are specific
+grid.newpage()
+grid.draw(visualize_plot_mat_grid(simu_1_res, V = 50, q_common = 3, q_specific = 2,scale = 4))
+```
+
+# Simulation Study 2 (`simu_2`) — tune phi/psi then final result
+
+```{r simu2-tune,warning=FALSE}
+Data_x <- sim_data$simu_2$Data_x
+Data_y <- sim_data$simu_2$Data_y
+Data <- list(Data_x, Data_y)
+
+simu_2_tuning <- compute_bic_grid(
+  Data_x = Data_x,
+  Data_y = Data_y,
+  q_common = 2,
+  q = c(1, 1),
+  V = 50,
+  gamma = 3,
+  rho = 0.98,
+  espli1 = 1e-3,
+  espli2 = 1e-3,
+  phi_seq = seq(1, 3, by = 0.5),
+  psi_seq = seq(0.1, 1, by = 0.3)
+)
+
+simu_2_tuning$BIC_matrix
+simu_2_tuning$optimal_phi
+simu_2_tuning$optimal_psi
+```
+
+```{r simu2-final}
+simu_2_res <- multi_view_decomposition(
+  Y = Data,
+  q = c(1, 1),
+  q_common = 2,
+  V = 50,
+  penalty = "SCAD",
+  phi = simu_2_tuning$optimal_phi,
+  psi = simu_2_tuning$optimal_psi,
+  gamma = 3,
+  rho = 0.98,
+  espli1 = 1e-3,
+  espli2 = 1e-3,
+  MaxIteration = 5000,
+  silent = T
+)
+
+```
+
+```{r simu2-visual, fig.width=14, fig.height=7}
+# simu_2 uses plot_mat-based grid: components 1-2 are common, 3 is specific
+grid.newpage()
+grid.draw(visualize_plot_mat_grid(simu_2_res, V = 50, q_common = 2, q_specific = 1,scale = 6))
+```
+
+# Simulation Study 3 (`simu_3`) — show results only (no tuning)
+
+```{r simu3-final}
+Data_x <- sim_data$simu_3$Data_x
+Data_y <- sim_data$simu_3$Data_y
+Data <- list(Data_x, Data_y)
+
+simu_3_res <- multi_view_decomposition(
+  Y = list(Data_x, Data_y),
+  q_common = 2,
+  q = c(2, 2),
+  V = 264,
+  penalty = "L1",
+  phi = 0.5,
+  psi = 0.5,
+  gamma = 3,
+  rho = 0.95,
+  espli1 = 1e-3,
+  espli2 = 1e-3,
+  MaxIteration = 500,
+  silent = T
+)
+
+```
+
+```{r simu3-visual, fig.width=16, fig.height=7}
+# simu_3 annotation: components 1-2 are common, 3-4 are specific
+grid.newpage()
+grid.draw(visualize_common_specific(simu_3_res, V = 264, q_common = 2, q_specific = 2))
+```
