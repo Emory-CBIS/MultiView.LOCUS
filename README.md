@@ -43,10 +43,10 @@ Formally, Locus-CCA identifies $q_k$ latent source **$S^{(k)}$** of each view $k
 #### Method Highlights
 
 - **Low-rank factorization**:  
-  Locus-CCA employs low-rank decomposition to capture intrinsic, structured patterns within connectivity matrices. This efficiently reduces model complexity and enhances interpretability.
+  Multi-View LOCUS employs low-rank decomposition to capture intrinsic, structured patterns within connectivity matrices. This efficiently reduces model complexity and enhances interpretability.
 
 - **Universal Sparsity Regularization**:  
-  Sparsity regularization (L1, Hardthreshold or SCAD penalties) is applied element-wise to canonical weights, ensuring robust and interpretable connectivity patterns that represent meaningful neural circuitry associated with clinical or behavioral phenotypes.
+  Sparsity regularization (L1, Hardthreshold or SCAD penalties) is applied element-wise to latent sources
 
 - **Common versus view-specific sources**:  
   The common and view-specific sources are considered simutaneously in our model.
