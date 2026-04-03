@@ -30,7 +30,7 @@ Please also make sure you have dependence "quadprog,
 ###  MultiView.LOCUS Method
 MultiView.LOCUS (** Multi-View Low-rank Decomposition of Brain Connectivity Matrices with Universal Sparsity by Canonical Correlation Analysis**) is a specialized form of Blind Source Separation designed explicitly for Multi-View brain connectivity data. The method uses a low-rank decomposition combined with sparsity-inducing penalties, enabling it to identify robust, interpretable connectivity patterns to each view.
 
-Formally, Locus-CCA identifies $q_k$ latent source **$S^{(k)}$** of each view $k$:
+Formally, MultiView LOCUS identifies $q_k$ latent source **$S^{(k)}$** of each view $k$:
 
 #### Method formulation
 <img src="Fig/decomp.png" width="650" align="center"/>
