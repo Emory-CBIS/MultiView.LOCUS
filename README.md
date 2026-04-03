@@ -46,7 +46,7 @@ Formally, MultiView LOCUS identifies $q_k$ latent source **$S^{(k)}$** of each v
   Multi-View LOCUS employs low-rank decomposition to capture intrinsic, structured patterns within connectivity matrices. This efficiently reduces model complexity and enhances interpretability.
 
 - **Universal Sparsity Regularization**:  
-  Sparsity regularization (L1, Hardthreshold or SCAD penalties) is applied element-wise to latent sources
+  Sparsity regularization (L1, Hardthreshold or SCAD penalties) is applied element-wise to latent sources within a low-rank structure.
 
 - **Common versus view-specific sources**:  
   The common and view-specific sources are considered simutaneously in our model.
