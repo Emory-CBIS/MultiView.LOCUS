@@ -6,17 +6,17 @@ This folder provides the datasets used in the examples.
 Main data files
 ---------------
 
-These are the files you will usually use directly:
+These are the file you will usually use directly:
 
-- **Simulation I**
+- **Simulation I data for view X and view Y**
   - `Data_x_simu1.rds`
   - `Data_y_simu1.rds`
 
-- **Simulation II**
+- **Simulation II for view X and view Y**
   - `Data_x_simu2.rds`
   - `Data_y_simu2.rds`
 
-- **Simulation III**
+- **Simulation III for view X and view Y**
   - `Data_x.rds`
   - `Data_y.rds`
 
