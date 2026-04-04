@@ -6,7 +6,7 @@
 -   I. Installation
 -   II. Method
 -   III. Detailed Descriptions of the Functions
--   IV. A Toy Example
+-   IV. **Reproducibility Report** and a detailed example of usage
 
 ## I. Package Installation
 You can easily install `MultiView.LOCUS` from GitHub with:
