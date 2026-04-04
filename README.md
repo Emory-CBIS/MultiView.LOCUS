@@ -350,4 +350,11 @@ full_plot <- arrangeGrob(
 Example outputed components, the first second rows represent the view 1 and view 2 resepctively. As in our component number specification, the first two columns represent the common sources, and rest columns represent the view-specific sources. 
 <img src="Fig/multi_view_annotated.png" width="1100" height="400" align="center"/>
 
+---
+
+### Citation
+If you use this software or the associated methods in your research, please cite:
+
+Yang, G., Wang, Y., Lukemire, J., & Guo, Y. **Investigating Neural Circuits Underlying Multi-View Brain Connectome using Multi-View LOCUS.** *Department of Biostatistics and Bioinformatics, Emory University.* (Unpublished manuscript 2026+).
+
 
