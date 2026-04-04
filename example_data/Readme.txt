@@ -20,7 +20,7 @@ These are the files you will usually use directly:
   - `Data_x.rds`
   - `Data_y.rds`
 
-The info below is  about how we get the Simulation data above,  optional
+The info below is  about how we get the Simulation data above (optional)
 ---------------------------------------------------------------------------------------------------
 
 The `S/` folder stores source objects used to generate the simulation data.
