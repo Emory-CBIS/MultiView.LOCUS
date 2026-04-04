@@ -148,12 +148,16 @@ calculate_bic(Y, model)
 
 
 
-## IV. A Simulation Example
+## IV. Simulation Studies using Brain Connectome Data.
 
+### Self-contained Rmd Report
+**We have a self-contained Rmd Report (`Reproducibility.rmd`) to replicate the Figures in Simulation I-III, with very short running time. You can also take a look at the knitted version `Reproducibility.pdf`.**   We also provide a detailed example for simulation III  below.
+
+### A detailed example for Simulation III
 In this section, we provide an example in our Simulation scenario III to demonstrate the implementation of the package. We generated the example data **Y** based on  estimated lantent connectivity traits from real brain connectivity. 
 Specifically, we generated connectivity matrices based on the real connectivity traits, using [Power's brain atlas](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3222858/). Each connectivity  trait is symmetric with dimensions of $V \times V$, where $V = 264$ is the number of nodes.   We have data from two views. For each view, the input $Y^{(k)}$ matrix is of dimension $n \times p$, where $n = 100$ subjects and $p = V(V-1)/2$ edges. Suppose we have $n$ connectivity matrices from each of the $n$ subjects, where each matrix is a $V \times V$ symmetric matrix. To generate our input matrix $Y$, we use the `Ltrans()` function to extract the upper triangular elements of each  matrix and convert them into a row vector of length $p = \frac{(V-1)V}{2}$. We then concatenate these vectors across subjects to obtain the group connectivity data $Y^{(k)}$. The data for the two views is listed in folder "example_data/".
 
-### Data loading
+#### Data loading
 ``` r
 # library 
 library(MultiView.LOCUS)
@@ -167,9 +171,9 @@ dim(Data_x)
 dim(Data_y)
 ```
 
-### Parameter Selection. (Optional)
+#### Parameter Selection. (Optional)
 
-#### Component numbers
+##### Component numbers
 We propose to select the number of  components  $q$ and $q_k$ based on the connICA + dual regression
 ```r
 # Step 1: Select Common Components
@@ -225,7 +229,7 @@ select_view_specific_components <- function(Y_list, S_agg, view_indices, thresho
 }
 ```
 
-#### regularization parameters
+##### regularization parameters
 Next, we proceed to use the BIC-type criterion to select the hyperparameters `phi` and `psi`. In this toy example, we  explore various value combinations to observe their impact on the BIC value. We recommend initially considering the range $seq(0, 1, 0.1)$ to evaluate the BIC.
 
 ``` r
@@ -276,7 +280,7 @@ cat("Selected phi =", optimal_phi, "and psi =", optimal_psi, "\n")
 
 It is important to note that the procedures for selecting the number of components and tuning regularization parameters provide useful guidance but should not be regarded as definitive. Although criteria such as connICA + dual regression and BIC offer valuable insights, the choices may not always be straightforward or fully reliable based solely on these automated metrics. In practice, we recommend that users also consider empirical validation, reproducibility, and neuroscience interpretability when finalizing the number of components and tuning parameters. Supplementary strategies, such as inspecting sparsity levels or evaluating biological relevance of extracted traits, are encouraged to complement the data-driven selection.
 
-### Application to the data
+#### Application of multi-view LOCUS
 
 Next, we perform the Multi-View LOCUS using the parameters we just selected (example).
 
