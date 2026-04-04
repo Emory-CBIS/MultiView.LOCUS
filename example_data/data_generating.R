@@ -48,7 +48,7 @@ S_s <- rbind(
   MultiView.LOCUS::Ltrans(specific_env$S_s4)
 )
 
-noise <- 0.01
+noise <- 0.1
 Data_x <- mixing_x %*% rbind(common_env$S_x, S_s[1:2, ]) + matrix(rnorm(122500, sd = noise), nrow = 100)
 Data_y <- mixing_y %*% rbind(common_env$S_y, S_s[3:4, ]) + matrix(rnorm(122500, sd = noise), nrow = 100)
 
@@ -59,8 +59,8 @@ saveRDS(Data_y, file = file.path(output_dir, "Data_y_simu1.rds"))
 # simu2
 # -------------------------
 set.seed(111)
-noise_level <- 0.01
-correlation_level <- 0.5
+noise_level <- 0.1
+correlation_level <- 0.4
 
 simu2_env <- new.env(parent = emptyenv())
 load(file.path(source_dir, "simulated_sources_type2.Rdata"), envir = simu2_env)
