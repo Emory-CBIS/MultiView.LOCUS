@@ -1,0 +1,265 @@
+Original_ROI,X,Y,Z,ROINAME1,ROINAME2,ROINAME3,ROINAME4,ROINAME5,ROINAME6,Module,V10,smithRSN,sorted_ROI,SmithName
+4,-56,-45,-24,Unknown,'Temporal Lobe','Inferior Temporal Gyrus','Gray Matter','brodmann area 37','Temporal_Inf_L (aal)',14,Uncertain,0,1,Unknown
+5,8,41,-24,Unknown,'Frontal Lobe','Sub-Gyral','White Matter','undefined','Rectus_R (aal)',14,Uncertain,0,2,Unknown
+6,-21,-22,-20,Unknown,'Limbic Lobe','Parahippocampa Gyrus','Gray Matter','brodmann area 35','undefined',14,Uncertain,0,3,Unknown
+8,-37,-29,-26,Unknown,'Limbic Lobe','Parahippocampa Gyrus','Gray Matter','brodmann area 36','Fusiform_L (aal)',14,Uncertain,0,4,Unknown
+10,52,-34,-27,Unknown,'Temporal Lobe','Fusiform Gyrus','White Matter','undefined','Temporal_Inf_R (aal)',14,Uncertain,0,5,Unknown
+11,55,-31,-17,Unknown,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Inf_R (aal)',14,Uncertain,0,6,Unknown
+13,-7,-52,61,Unknown,'Parietal Lobe','Precuneus','Gray Matter','brodmann area 7','Precuneus_L (aal)',1,Sensory/somatomotor Hand,0,7,Unknown
+22,10,-46,73,Unknown,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 7','Precuneus_R (aal)',1,Sensory/somatomotor Hand,0,8,Unknown
+31,10,-17,74,Unknown,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 6','Supp_Motor_Area_R (aal)',1,Sensory/somatomotor Hand,0,9,Unknown
+35,-13,-17,75,Unknown,'Frontal Lobe','Precentral Gyrus','White Matter','undefined','Paracentral_Lobule_L (aal)',1,Sensory/somatomotor Hand,0,10,Unknown
+37,-38,-15,69,Unknown,'undefined','undefined','undefined','undefined','undefined',1,Sensory/somatomotor Hand,0,11,Unknown
+38,-16,-46,73,Unknown,'Parietal Lobe','Postcentral Gyrus','undefined','undefined','Parietal_Sup_L (aal)',1,Sensory/somatomotor Hand,0,12,Unknown
+50,-16,-5,71,Unknown,'Frontal Lobe','Superior Frontal Gyrus','White Matter','undefined','Frontal_Sup_L (aal)',3,Cingulo-opercular Task Control,0,13,Unknown
+53,13,-1,70,Unknown,'Frontal Lobe','Superior Frontal Gyrus','White Matter','undefined','Supp_Motor_Area_R (aal)',3,Cingulo-opercular Task Control,0,14,Unknown
+78,-18,63,-9,Unknown,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 11','Frontal_Sup_Orb_L (aal)',5,Default mode,0,15,Unknown
+81,-44,12,-34,Unknown,'Temporal Lobe','Superior Temporal Gyrus','Gray Matter','brodmann area 38','Temporal_Pole_Mid_L (aal)',5,Default mode,0,16,Unknown
+82,46,16,-30,Unknown,'Temporal Lobe','Superior Temporal Gyrus','White Matter','undefined','Temporal_Pole_Mid_R (aal)',5,Default mode,0,17,Unknown
+83,-68,-23,-16,Unknown,'undefined','undefined','undefined','undefined','Temporal_Mid_L (aal)',5,Default mode,0,18,Unknown
+85,27,16,-17,Unknown,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Insula_R (aal)',14,Uncertain,0,19,Unknown
+121,13,30,59,Unknown,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 6','Frontal_Sup_Medial_R (aal)',5,Default mode,0,20,Unknown
+124,-26,-40,-8,Unknown,'Limbic Lobe','Parahippocampa Gyrus','White Matter','undefined','ParaHippocampal_L (aal)',5,Default mode,0,21,Unknown
+126,-34,-38,-16,Unknown,'Temporal Lobe','Fusiform Gyrus','Gray Matter','brodmann area 37','Fusiform_L (aal)',5,Default mode,0,22,Unknown
+127,28,-77,-32,Unknown,'Cerebellum Posterior Lobe','Uvula','undefined','undefined','Cerebelum_Crus1_R (aal)',5,Default mode,0,23,Unknown
+128,52,7,-30,Unknown,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Pole_Mid_R (aal)',5,Default mode,0,24,Unknown
+129,-53,3,-27,Unknown,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_L (aal)',5,Default mode,0,25,Unknown
+132,-31,19,-19,Unknown,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Frontal_Inf_Orb_L (aal)',14,Uncertain,0,26,Unknown
+138,-10,11,67,Unknown,'Frontal Lobe','Superior Frontal Gyrus','White Matter','undefined','Supp_Motor_Area_L (aal)',11,Ventral attention,0,27,Unknown
+184,17,-80,-34,Unknown,'Cerebellum Posterior Lobe','Uvula','undefined','undefined','Cerebelum_Crus2_R (aal)',14,Uncertain,0,28,Unknown
+247,33,-12,-34,Unknown,'Limbic Lobe','Uncus','White Matter','undefined','Fusiform_R (aal)',14,Uncertain,0,29,Unknown
+248,-31,-10,-36,Unknown,'Limbic Lobe','Uncus','White Matter','undefined','Fusiform_L (aal)',14,Uncertain,0,30,Unknown
+249,49,-3,-38,Unknown,'Temporal Lobe','Inferior Temporal Gyrus','Gray Matter','brodmann area 20','Temporal_Inf_R (aal)',14,Uncertain,0,31,Unknown
+250,-50,-7,-39,Unknown,'Temporal Lobe','Inferior Temporal Gyrus','Gray Matter','brodmann area 20','Temporal_Inf_L (aal)',14,Uncertain,0,32,Unknown
+77,-13,-40,1,Med Vis,'Limbic Lobe','Parahippocampa Gyrus','White Matter','undefined','Precuneus_L (aal)',5,Default mode,1,33,Med Vis
+143,18,-47,-10,Med Vis,'Limbic Lobe','Parahippocampa Gyrus','Gray Matter','brodmann area 19','Lingual_R (aal)',7,Visual,1,34,Med Vis
+145,8,-72,11,Med Vis,'Occipital Lobe','Cuneus','undefined','undefined','Calcarine_R (aal)',7,Visual,1,35,Med Vis
+146,-8,-81,7,Med Vis,'Occipital Lobe','Cuneus','Gray Matter','brodmann area 17','Calcarine_L (aal)',7,Visual,1,36,Med Vis
+148,20,-66,2,Med Vis,'Occipital Lobe','Lingual Gyrus','White Matter','undefined','Lingual_R (aal)',7,Visual,1,37,Med Vis
+151,-15,-72,-8,Med Vis,'Occipital Lobe','Lingual Gyrus','Gray Matter','brodmann area 18','Lingual_L (aal)',7,Visual,1,38,Med Vis
+152,-18,-68,5,Med Vis,'Occipital Lobe','Cuneus','White Matter','undefined','Calcarine_L (aal)',7,Visual,1,39,Med Vis
+155,-14,-91,31,Med Vis,'Occipital Lobe','Cuneus','Gray Matter','brodmann area 19','Occipital_Sup_L (aal)',7,Visual,1,40,Med Vis
+156,15,-87,37,Med Vis,'Parietal Lobe','Precuneus','undefined','undefined','Cuneus_R (aal)',7,Visual,1,41,Med Vis
+159,15,-77,31,Med Vis,'Occipital Lobe','Cuneus','Gray Matter','brodmann area 7','Cuneus_R (aal)',7,Visual,1,42,Med Vis
+160,-16,-52,-1,Med Vis,'Occipital Lobe','Lingual Gyrus','Gray Matter','undefined','Lingual_L (aal)',7,Visual,1,43,Med Vis
+163,6,-72,24,Med Vis,'Occipital Lobe','Precuneus','White Matter','undefined','Cuneus_R (aal)',7,Visual,1,44,Med Vis
+166,-16,-77,34,Med Vis,'Parietal Lobe','Precuneus','Gray Matter','brodmann area 7','Cuneus_L (aal)',7,Visual,1,45,Med Vis
+167,-3,-81,21,Med Vis,'Occipital Lobe','Cuneus','Gray Matter','brodmann area 18','Cuneus_L (aal)',7,Visual,1,46,Med Vis
+170,6,-81,6,Med Vis,'Occipital Lobe','Cuneus','White Matter','undefined','Calcarine_R (aal)',7,Visual,1,47,Med Vis
+1,-25,-98,-12,Occ. Pole,'Occipital Lobe','Lingual Gyrus','Gray Matter','brodmann area 18','Occipital_Inf_L (aal)',14,Uncertain,2,48,Occ. Pole
+2,27,-97,-13,Occ. Pole,'Occipital Lobe','Inferior Occipital Gyrus','Gray Matter','brodmann area 17','Lingual_R (aal)',14,Uncertain,2,49,Occ. Pole
+18,-7,-33,72,Occ. Pole,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 3','Paracentral_Lobule_L (aal)',1,Sensory/somatomotor Hand,2,50,Occ. Pole
+19,13,-33,75,Occ. Pole,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 3','Postcentral_R (aal)',1,Sensory/somatomotor Hand,2,51,Occ. Pole
+23,-23,-30,72,Occ. Pole,'Parietal Lobe','Postcentral Gyrus','undefined','undefined','Postcentral_L (aal)',1,Sensory/somatomotor Hand,2,52,Occ. Pole
+140,8,-91,-7,Occ. Pole,'Occipital Lobe','Lingual Gyrus','White Matter','undefined','Lingual_R (aal)',14,Uncertain,2,53,Occ. Pole
+141,17,-91,-14,Occ. Pole,'Occipital Lobe','Inferior Occipital Gyrus','White Matter','undefined','Lingual_R (aal)',14,Uncertain,2,54,Occ. Pole
+142,-12,-95,-13,Occ. Pole,'Occipital Lobe','Lingual Gyrus','Gray Matter','brodmann area 17','Lingual_L (aal)',14,Uncertain,2,55,Occ. Pole
+149,-24,-91,19,Occ. Pole,'Occipital Lobe','Cuneus','White Matter','undefined','Occipital_Mid_L (aal)',7,Visual,2,56,Occ. Pole
+158,20,-86,-2,Occ. Pole,'Occipital Lobe','Lingual Gyrus','White Matter','undefined','Lingual_R (aal)',7,Visual,2,57,Occ. Pole
+165,26,-79,-16,Occ. Pole,'Occipital Lobe','Lingual Gyrus','Gray Matter','brodmann area 18','Fusiform_R (aal)',7,Visual,2,58,Occ. Pole
+168,-40,-88,-6,Occ. Pole,'Occipital Lobe','Inferior Occipital Gyrus','White Matter','undefined','Occipital_Mid_L (aal)',7,Visual,2,59,Occ. Pole
+171,-26,-90,3,Occ. Pole,'Occipital Lobe','Middle Occipital Gyrus','Gray Matter','brodmann area 19','Occipital_Mid_L (aal)',7,Visual,2,60,Occ. Pole
+172,-33,-79,-13,Occ. Pole,'Occipital Lobe','Middle Occipital Gyrus','White Matter','undefined','Fusiform_L (aal)',7,Visual,2,61,Occ. Pole
+224,-10,-18,7,Occ. Pole,'Sub-lobar','Thalamus','Gray Matter','Medial Dorsal Nucleus','Thalamus_L (aal)',10,Subcortical,2,62,Occ. Pole
+118,-58,-30,-4,Lat Vis,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_L (aal)',5,Default mode,3,63,Lat Vis
+125,27,-37,-13,Lat Vis,'Limbic Lobe','Parahippocampa Gyrus','White Matter','undefined','Fusiform_R (aal)',5,Default mode,3,64,Lat Vis
+144,40,-72,14,Lat Vis,'Occipital Lobe','Middle Temporal Gyrus','White Matter','undefined','Occipital_Mid_R (aal)',7,Visual,3,65,Lat Vis
+147,-28,-79,19,Lat Vis,'Temporal Lobe','Sub-Gyral','White Matter','undefined','Occipital_Mid_L (aal)',7,Visual,3,66,Lat Vis
+150,27,-59,-9,Lat Vis,'Occipital Lobe','Lingual Gyrus','White Matter','undefined','Fusiform_R (aal)',7,Visual,3,67,Lat Vis
+153,43,-78,-12,Lat Vis,'Occipital Lobe','Inferior Occipital Gyrus','Gray Matter','brodmann area 19','Occipital_Inf_R (aal)',7,Visual,3,68,Lat Vis
+154,-47,-76,-10,Lat Vis,'Occipital Lobe','Middle Occipital Gyrus','White Matter','undefined','Occipital_Inf_L (aal)',7,Visual,3,69,Lat Vis
+157,29,-77,25,Lat Vis,'Occipital Lobe','Sub-Gyral','White Matter','undefined','Occipital_Mid_R (aal)',7,Visual,3,70,Lat Vis
+161,42,-66,-8,Lat Vis,'Occipital Lobe','Middle Occipital Gyrus','White Matter','undefined','Temporal_Inf_R (aal)',7,Visual,3,71,Lat Vis
+162,24,-87,24,Lat Vis,'Occipital Lobe','Cuneus','White Matter','undefined','Occipital_Sup_R (aal)',7,Visual,3,72,Lat Vis
+164,-42,-74,0,Lat Vis,'Occipital Lobe','Middle Occipital Gyrus','White Matter','undefined','Occipital_Mid_L (aal)',7,Visual,3,73,Lat Vis
+169,37,-84,13,Lat Vis,'Occipital Lobe','Middle Occipital Gyrus','White Matter','undefined','Occipital_Mid_R (aal)',7,Visual,3,74,Lat Vis
+173,37,-81,1,Lat Vis,'Occipital Lobe','Middle Occipital Gyrus','Gray Matter','brodmann area 19','Occipital_Mid_R (aal)',7,Visual,3,75,Lat Vis
+252,-52,-63,5,Lat Vis,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_L (aal)',12,Dorsal attention,3,76,Lat Vis
+253,-47,-51,-21,Lat Vis,'Temporal Lobe','Fusiform Gyrus','White Matter','undefined','Temporal_Inf_L (aal)',14,Uncertain,3,77,Lat Vis
+254,46,-47,-17,Lat Vis,'Temporal Lobe','Fusiform Gyrus','White Matter','undefined','Temporal_Inf_R (aal)',14,Uncertain,3,78,Lat Vis
+256,22,-65,48,Lat Vis,'Parietal Lobe','Precuneus','undefined','undefined','Parietal_Sup_R (aal)',12,Dorsal attention,3,79,Lat Vis
+257,46,-59,4,Lat Vis,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_R (aal)',12,Dorsal attention,3,80,Lat Vis
+262,-42,-60,-9,Lat Vis,'Occipital Lobe','Sub-Gyral','White Matter','undefined','Temporal_Inf_L (aal)',12,Dorsal attention,3,81,Lat Vis
+74,-41,-75,26,Default Mode,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Occipital_Mid_L (aal)',5,Default mode,4,82,Default Mode
+75,6,67,-4,Default Mode,'undefined','undefined','undefined','undefined','Frontal_Med_Orb_R (aal)',5,Default mode,4,83,Default Mode
+76,8,48,-15,Default Mode,'Frontal Lobe','Medial Frontal Gyrus','White Matter','undefined','Rectus_R (aal)',5,Default mode,4,84,Default Mode
+79,-46,-61,21,Default Mode,'Temporal Lobe','Middle Temporal Gyrus','Gray Matter','brodmann area 39','Temporal_Mid_L (aal)',5,Default mode,4,85,Default Mode
+84,-58,-26,-15,Default Mode,'Temporal Lobe','Middle Temporal Gyrus','Gray Matter','brodmann area 21','Temporal_Mid_L (aal)',14,Uncertain,4,86,Default Mode
+86,-44,-65,35,Default Mode,'Parietal Lobe','Angular Gyrus','White Matter','undefined','Angular_L (aal)',5,Default mode,4,87,Default Mode
+88,-7,-55,27,Default Mode,'Limbic Lobe','Cingulate Gyrus','White Matter','undefined','Precuneus_L (aal)',5,Default mode,4,88,Default Mode
+89,6,-59,35,Default Mode,'Parietal Lobe','Precuneus','White Matter','undefined','Precuneus_R (aal)',5,Default mode,4,89,Default Mode
+90,-11,-56,16,Default Mode,'Limbic Lobe','Posterior Cingulate','White Matter','undefined','Precuneus_L (aal)',5,Default mode,4,90,Default Mode
+91,-3,-49,13,Default Mode,'Limbic Lobe','Posterior Cingulate','White Matter','undefined','Precuneus_L (aal)',5,Default mode,4,91,Default Mode
+92,8,-48,31,Default Mode,'Limbic Lobe','Cingulate Gyrus','Gray Matter','brodmann area 31','Cingulum_Mid_R (aal)',5,Default mode,4,92,Default Mode
+93,15,-63,26,Default Mode,'Occipital Lobe','Precuneus','Gray Matter','brodmann area 31','Precuneus_R (aal)',5,Default mode,4,93,Default Mode
+95,11,-54,17,Default Mode,'Limbic Lobe','Posterior Cingulate','White Matter','undefined','Precuneus_R (aal)',5,Default mode,4,94,Default Mode
+109,-3,44,-9,Default Mode,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 11','Frontal_Med_Orb_L (aal)',5,Default mode,4,95,Default Mode
+116,65,-12,-19,Default Mode,'Temporal Lobe','Inferior Temporal Gyrus','Gray Matter','brodmann area 21','Temporal_Mid_R (aal)',5,Default mode,4,96,Default Mode
+117,-56,-13,-10,Default Mode,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_L (aal)',5,Default mode,4,97,Default Mode
+133,-2,-35,31,Default Mode,'Limbic Lobe','Cingulate Gyrus','Gray Matter','brodmann area 31','Cingulum_Post_L (aal)',6,Memory retrieval?,4,98,Default Mode
+134,-7,-71,42,Default Mode,'Parietal Lobe','Precuneus','Gray Matter','brodmann area 7','Precuneus_L (aal)',6,Memory retrieval?,4,99,Default Mode
+135,11,-66,42,Default Mode,'Parietal Lobe','Precuneus','White Matter','undefined','Precuneus_R (aal)',6,Memory retrieval?,4,100,Default Mode
+221,2,-24,30,Default Mode,'Limbic Lobe','Cingulate Gyrus','undefined','undefined','Cingulum_Mid_R (aal)',6,Memory retrieval?,4,101,Default Mode
+183,-18,-76,-24,Cerebellum,'Cerebellum Posterior Lobe','Declive','undefined','undefined','Cerebelum_Crus1_L (aal)',14,Uncertain,5,102,Cerebellum
+185,35,-67,-34,Cerebellum,'Cerebellum Posterior Lobe','Tuber','undefined','undefined','Cerebelum_Crus1_R (aal)',14,Uncertain,5,103,Cerebellum
+243,-16,-65,-20,Cerebellum,'Cerebellum Posterior Lobe','Declive','undefined','undefined','Cerebelum_6_L (aal)',13,Cerebellar,5,104,Cerebellum
+244,-32,-55,-25,Cerebellum,'Cerebellum Anterior Lobe','Culmen','undefined','undefined','Cerebelum_6_L (aal)',13,Cerebellar,5,105,Cerebellum
+245,22,-58,-23,Cerebellum,'Cerebellum Posterior Lobe','Declive','undefined','undefined','Cerebelum_6_R (aal)',13,Cerebellar,5,106,Cerebellum
+246,1,-62,-18,Cerebellum,'Cerebellum Posterior Lobe','Declive','undefined','undefined','Vermis_6 (aal)',13,Cerebellar,5,107,Cerebellum
+14,-14,-18,40,SM,'Limbic Lobe','Cingulate Gyrus','Gray Matter','brodmann area 24','undefined',1,Sensory/somatomotor Hand,6,108,SM
+15,0,-15,47,SM,'Frontal Lobe','Paracentral Lobule','undefined','undefined','Supp_Motor_Area_L (aal)',1,Sensory/somatomotor Hand,6,109,SM
+16,10,-2,45,SM,'Limbic Lobe','Cingulate Gyrus','White Matter','undefined','Supp_Motor_Area_R (aal)',1,Sensory/somatomotor Hand,6,110,SM
+17,-7,-21,65,SM,'Frontal Lobe','Medial Frontal Gyrus','White Matter','undefined','Paracentral_Lobule_L (aal)',1,Sensory/somatomotor Hand,6,111,SM
+20,-54,-23,43,SM,'Parietal Lobe','Postcentral Gyrus','White Matter','undefined','Parietal_Inf_L (aal)',1,Sensory/somatomotor Hand,6,112,SM
+21,29,-17,71,SM,'Frontal Lobe','Precentral Gyrus','White Matter','undefined','Precentral_R (aal)',1,Sensory/somatomotor Hand,6,113,SM
+24,-40,-19,54,SM,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 3','Precentral_L (aal)',1,Sensory/somatomotor Hand,6,114,SM
+25,29,-39,59,SM,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 40','Postcentral_R (aal)',1,Sensory/somatomotor Hand,6,115,SM
+26,50,-20,42,SM,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 3','Postcentral_R (aal)',1,Sensory/somatomotor Hand,6,116,SM
+27,-38,-27,69,SM,'undefined','undefined','undefined','undefined','Postcentral_L (aal)',1,Sensory/somatomotor Hand,6,117,SM
+28,20,-29,60,SM,'Frontal Lobe','Precentral Gyrus','Gray Matter','brodmann area 4','undefined',1,Sensory/somatomotor Hand,6,118,SM
+30,-29,-43,61,SM,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 5','Postcentral_L (aal)',1,Sensory/somatomotor Hand,6,119,SM
+32,22,-42,69,SM,'Parietal Lobe','Postcentral Gyrus','White Matter','undefined','Postcentral_R (aal)',1,Sensory/somatomotor Hand,6,120,SM
+33,-45,-32,47,SM,'Parietal Lobe','Inferior Parietal Lobule','undefined','undefined','Postcentral_L (aal)',1,Sensory/somatomotor Hand,6,121,SM
+34,-21,-31,61,SM,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 3','Postcentral_L (aal)',1,Sensory/somatomotor Hand,6,122,SM
+36,42,-20,55,SM,'Parietal Lobe','Postcentral Gyrus','Gray Matter','brodmann area 3','Precentral_R (aal)',1,Sensory/somatomotor Hand,6,123,SM
+39,2,-28,60,SM,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 6','Paracentral_Lobule_R (aal)',1,Sensory/somatomotor Hand,6,124,SM
+40,3,-17,58,SM,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 6','Supp_Motor_Area_R (aal)',1,Sensory/somatomotor Hand,6,125,SM
+41,38,-17,45,SM,'Frontal Lobe','Precentral Gyrus','White Matter','undefined','Precentral_R (aal)',1,Sensory/somatomotor Hand,6,126,SM
+42,-49,-11,35,SM,'Frontal Lobe','Precentral Gyrus','White Matter','undefined','Postcentral_L (aal)',2,Sensory/somatomotor Mouth,6,127,SM
+44,51,-6,32,SM,'Frontal Lobe','Precentral Gyrus','Gray Matter','brodmann area 6','Postcentral_R (aal)',2,Sensory/somatomotor Mouth,6,128,SM
+45,-53,-10,24,SM,'Frontal Lobe','Precentral Gyrus','White Matter','undefined','Postcentral_L (aal)',2,Sensory/somatomotor Mouth,6,129,SM
+47,-3,2,53,SM,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 6','Supp_Motor_Area_L (aal)',3,Cingulo-opercular Task Control,6,130,SM
+49,19,-8,64,SM,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 6','Frontal_Sup_R (aal)',3,Cingulo-opercular Task Control,6,131,SM
+51,-10,-2,42,SM,'Limbic Lobe','Cingulate Gyrus','White Matter','undefined','Cingulum_Mid_L (aal)',3,Cingulo-opercular Task Control,6,132,SM
+54,7,8,51,SM,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 32','Supp_Motor_Area_R (aal)',3,Cingulo-opercular Task Control,6,133,SM
+67,43,-23,20,SM,'Sub-lobar','Insula','White Matter','undefined','Rolandic_Oper_R (aal)',4,Auditory,6,134,SM
+72,59,-17,29,SM,'Parietal Lobe','Postcentral Gyrus','White Matter','undefined','Postcentral_R (aal)',4,Auditory,6,135,SM
+203,11,-39,50,SM,'Frontal Lobe','Paracentral Lobule','Gray Matter','brodmann area 5','Cingulum_Mid_R (aal)',9,Salience,6,136,SM
+255,47,-30,49,SM,'Parietal Lobe','Postcentral Gyrus','undefined','undefined','Postcentral_R (aal)',1,Sensory/somatomotor Hand,6,137,SM
+264,29,-5,54,SM,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 6','Precentral_R (aal)',12,Dorsal attention,6,138,SM
+43,36,-9,14,Auditory,'Sub-lobar','Insula','White Matter','undefined','Insula_R (aal)',2,Sensory/somatomotor Mouth,7,139,Auditory
+52,37,1,-4,Auditory,'Sub-lobar','Insula','White Matter','undefined','undefined',3,Cingulo-opercular Task Control,7,140,Auditory
+55,-45,0,9,Auditory,'Frontal Lobe','Precentral Gyrus','Gray Matter','brodmann area 44','Rolandic_Oper_L (aal)',3,Cingulo-opercular Task Control,7,141,Auditory
+56,49,8,-1,Auditory,'Temporal Lobe','Superior Temporal Gyrus','undefined','undefined','Insula_R (aal)',3,Cingulo-opercular Task Control,7,142,Auditory
+57,-34,3,4,Auditory,'Sub-lobar','Claustrum','Gray Matter','undefined','undefined',3,Cingulo-opercular Task Control,7,143,Auditory
+58,-51,8,-2,Auditory,'Temporal Lobe','Superior Temporal Gyrus','Gray Matter','brodmann area 22','Temporal_Pole_Sup_L (aal)',3,Cingulo-opercular Task Control,7,144,Auditory
+60,36,10,1,Auditory,'Sub-lobar','Insula','White Matter','undefined','undefined',3,Cingulo-opercular Task Control,7,145,Auditory
+61,32,-26,13,Auditory,'Sub-lobar','Insula','Gray Matter','brodmann area 13','undefined',4,Auditory,7,146,Auditory
+63,58,-16,7,Auditory,'Temporal Lobe','Superior Temporal Gyrus','White Matter','undefined','Temporal_Sup_R (aal)',4,Auditory,7,147,Auditory
+64,-38,-33,17,Auditory,'Sub-lobar','Insula','Gray Matter','brodmann area 13','Rolandic_Oper_L (aal)',4,Auditory,7,148,Auditory
+65,-60,-25,14,Auditory,'Temporal Lobe','Superior Temporal Gyrus','undefined','undefined','Temporal_Sup_L (aal)',4,Auditory,7,149,Auditory
+66,-49,-26,5,Auditory,'Temporal Lobe','Superior Temporal Gyrus','Gray Matter','brodmann area 41','Temporal_Sup_L (aal)',4,Auditory,7,150,Auditory
+68,-50,-34,26,Auditory,'Parietal Lobe','Inferior Parietal Lobule','White Matter','undefined','SupraMarginal_L (aal)',4,Auditory,7,151,Auditory
+69,-53,-22,23,Auditory,'Parietal Lobe','Postcentral Gyrus','White Matter','undefined','SupraMarginal_L (aal)',4,Auditory,7,152,Auditory
+70,-55,-9,12,Auditory,'Frontal Lobe','Precentral Gyrus','Gray Matter','brodmann area 43','Rolandic_Oper_L (aal)',4,Auditory,7,153,Auditory
+71,56,-5,13,Auditory,'Frontal Lobe','Precentral Gyrus','Gray Matter','brodmann area 43','Rolandic_Oper_R (aal)',4,Auditory,7,154,Auditory
+73,-30,-27,12,Auditory,'Sub-lobar','Insula','White Matter','undefined','undefined',4,Auditory,7,155,Auditory
+123,52,-2,-16,Auditory,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_R (aal)',5,Default mode,7,156,Auditory
+208,-35,20,0,Auditory,'Sub-lobar','Extra-Nuclear','Gray Matter','brodmann area 47','Insula_L (aal)',9,Salience,7,157,Auditory
+211,34,16,-8,Auditory,'Sub-lobar','Extra-Nuclear','undefined','undefined','Insula_R (aal)',9,Salience,7,158,Auditory
+229,31,-14,2,Auditory,'Sub-lobar','Extra-Nuclear','White Matter','undefined','Putamen_R (aal)',10,Subcortical,7,159,Auditory
+231,29,1,4,Auditory,'Sub-lobar','Extra-Nuclear','White Matter','undefined','Putamen_R (aal)',10,Subcortical,7,160,Auditory
+232,-31,-11,0,Auditory,'Sub-lobar','Extra-Nuclear','White Matter','undefined','undefined',10,Subcortical,7,161,Auditory
+236,-56,-50,10,Auditory,'Temporal Lobe','Superior Temporal Gyrus','White Matter','undefined','Temporal_Mid_L (aal)',11,Ventral attention,7,162,Auditory
+237,-55,-40,14,Auditory,'Temporal Lobe','Superior Temporal Gyrus','White Matter','undefined','Temporal_Sup_L (aal)',11,Ventral attention,7,163,Auditory
+238,52,-33,8,Auditory,'Temporal Lobe','Superior Temporal Gyrus','White Matter','undefined','Temporal_Sup_R (aal)',11,Ventral attention,7,164,Auditory
+239,51,-29,-4,Auditory,'Temporal Lobe','Middle Temporal Gyrus','Gray Matter','brodmann area 21','Temporal_Mid_R (aal)',11,Ventral attention,7,165,Auditory
+240,56,-46,11,Auditory,'Temporal Lobe','Superior Temporal Gyrus','White Matter','undefined','Temporal_Sup_R (aal)',11,Ventral attention,7,166,Auditory
+242,-49,25,-1,Auditory,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Frontal_Inf_Tri_L (aal)',11,Ventral attention,7,167,Auditory
+3,24,32,-18,Executive Control,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Sup_Orb_R (aal)',14,Uncertain,8,168,Executive Control
+7,17,-28,-17,Executive Control,'Cerebellum Anterior Lobe','Culmen','undefined','undefined','ParaHippocampal_R (aal)',14,Uncertain,8,169,Executive Control
+59,-5,18,34,Executive Control,'Limbic Lobe','Cingulate Gyrus','White Matter','undefined','Cingulum_Mid_L (aal)',3,Cingulo-opercular Task Control,8,170,Executive Control
+94,-2,-37,44,Executive Control,'Limbic Lobe','Cingulate Gyrus','Gray Matter','brodmann area 31','Cingulum_Mid_L (aal)',5,Default mode,8,171,Executive Control
+101,22,39,39,Executive Control,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 9','Frontal_Sup_R (aal)',5,Default mode,8,172,Executive Control
+104,-20,45,39,Executive Control,'Frontal Lobe','Superior Frontal Gyrus','White Matter','undefined','Frontal_Sup_L (aal)',5,Default mode,8,173,Executive Control
+105,6,54,16,Executive Control,'Frontal Lobe','Medial Frontal Gyrus','undefined','undefined','Frontal_Sup_Medial_R (aal)',5,Default mode,8,174,Executive Control
+106,6,64,22,Executive Control,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 10','Frontal_Sup_Medial_R (aal)',5,Default mode,8,175,Executive Control
+107,-7,51,-1,Executive Control,'Frontal Lobe','Medial Frontal Gyrus','White Matter','undefined','Cingulum_Ant_L (aal)',5,Default mode,8,176,Executive Control
+108,9,54,3,Executive Control,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','undefined','Frontal_Sup_Medial_R (aal)',5,Default mode,8,177,Executive Control
+110,8,42,-5,Executive Control,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 10','Frontal_Med_Orb_R (aal)',5,Default mode,8,178,Executive Control
+111,-11,45,8,Executive Control,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 10','Cingulum_Ant_L (aal)',5,Default mode,8,179,Executive Control
+113,-3,42,16,Executive Control,'Limbic Lobe','Anterior Cingulate','Gray Matter','brodmann area 32','Cingulum_Ant_L (aal)',5,Default mode,8,180,Executive Control
+114,-20,64,19,Executive Control,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 10','Frontal_Sup_L (aal)',5,Default mode,8,181,Executive Control
+115,-8,48,23,Executive Control,'Frontal Lobe','Medial Frontal Gyrus','White Matter','undefined','Frontal_Sup_Medial_L (aal)',5,Default mode,8,182,Executive Control
+122,12,36,20,Executive Control,'Limbic Lobe','Anterior Cingulate','Gray Matter','brodmann area 32','Cingulum_Ant_R (aal)',5,Default mode,8,183,Executive Control
+136,4,-48,51,Executive Control,'Parietal Lobe','Precuneus','Gray Matter','brodmann area 7','Precuneus_R (aal)',6,Memory retrieval?,8,184,Executive Control
+180,24,45,-15,Executive Control,'Frontal Lobe','Superior Frontal Gyrus','White Matter','undefined','Frontal_Sup_Orb_R (aal)',8,Fronto-parietal Task Control,8,185,Executive Control
+189,38,43,15,Executive Control,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Mid_R (aal)',8,Fronto-parietal Task Control,8,186,Executive Control
+206,31,33,26,Executive Control,'Frontal Lobe','Sub-Gyral','White Matter','undefined','Frontal_Mid_R (aal)',9,Salience,8,187,Executive Control
+209,36,22,3,Executive Control,'Sub-lobar','Insula','Gray Matter','brodmann area 13','Insula_R (aal)',9,Salience,8,188,Executive Control
+210,37,32,-2,Executive Control,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Frontal_Inf_Orb_R (aal)',9,Salience,8,189,Executive Control
+212,-11,26,25,Executive Control,'Limbic Lobe','Anterior Cingulate','White Matter','undefined','undefined',9,Salience,8,190,Executive Control
+213,-1,15,44,Executive Control,'Limbic Lobe','Cingulate Gyrus','Gray Matter','brodmann area 32','Supp_Motor_Area_L (aal)',9,Salience,8,191,Executive Control
+214,-28,52,21,Executive Control,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 10','Frontal_Mid_L (aal)',9,Salience,8,192,Executive Control
+215,0,30,27,Executive Control,'undefined','undefined','undefined','undefined','Cingulum_Ant_L (aal)',9,Salience,8,193,Executive Control
+216,5,23,37,Executive Control,'Frontal Lobe','Cingulate Gyrus','Gray Matter','brodmann area 32','Cingulum_Mid_R (aal)',9,Salience,8,194,Executive Control
+217,10,22,27,Executive Control,'Limbic Lobe','Anterior Cingulate','undefined','undefined','Cingulum_Ant_R (aal)',9,Salience,8,195,Executive Control
+218,31,56,14,Executive Control,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Mid_R (aal)',9,Salience,8,196,Executive Control
+219,26,50,27,Executive Control,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 10','Frontal_Mid_R (aal)',9,Salience,8,197,Executive Control
+222,6,-24,0,Executive Control,'Sub-lobar','Extra-Nuclear','White Matter','undefined','Thalamus_R (aal)',10,Subcortical,8,198,Executive Control
+223,-2,-13,12,Executive Control,'Sub-lobar','Extra-Nuclear','White Matter','undefined','Thalamus_L (aal)',10,Subcortical,8,199,Executive Control
+225,12,-17,8,Executive Control,'Sub-lobar','Thalamus','Gray Matter','undefined','Thalamus_R (aal)',10,Subcortical,8,200,Executive Control
+226,-5,-28,-4,Executive Control,'Midbrain','undefined','undefined','undefined','undefined',10,Subcortical,8,201,Executive Control
+227,-22,7,-5,Executive Control,'Sub-lobar','Lentiform Nucleus','Gray Matter','Putamen','Putamen_L (aal)',10,Subcortical,8,202,Executive Control
+228,-15,4,8,Executive Control,'Sub-lobar','Lentiform Nucleus','Gray Matter','Putamen','undefined',10,Subcortical,8,203,Executive Control
+230,23,10,1,Executive Control,'Sub-lobar','Lentiform Nucleus','Gray Matter','Putamen','Putamen_R (aal)',10,Subcortical,8,204,Executive Control
+233,15,5,7,Executive Control,'Sub-lobar','Extra-Nuclear','White Matter','undefined','undefined',10,Subcortical,8,205,Executive Control
+234,9,-4,6,Executive Control,'Sub-lobar','Thalamus','Gray Matter','Ventral Anterior Nucleus','undefined',10,Subcortical,8,206,Executive Control
+9,65,-24,-19,FPR,'undefined','undefined','undefined','undefined','Temporal_Inf_R (aal)',14,Uncertain,9,207,FPR
+12,34,38,-12,FPR,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 11','Frontal_Inf_Orb_R (aal)',14,Uncertain,9,208,FPR
+29,44,-8,57,FPR,'Frontal Lobe','Precentral Gyrus','Gray Matter','brodmann area 6','Precentral_R (aal)',1,Sensory/somatomotor Hand,9,209,FPR
+46,66,-8,25,FPR,'Frontal Lobe','Precentral Gyrus','undefined','undefined','Postcentral_R (aal)',2,Sensory/somatomotor Mouth,9,210,FPR
+48,54,-28,34,FPR,'Parietal Lobe','Inferior Parietal Lobule','undefined','undefined','SupraMarginal_R (aal)',3,Cingulo-opercular Task Control,9,211,FPR
+62,65,-33,20,FPR,'Temporal Lobe','Superior Temporal Gyrus','Gray Matter','brodmann area 42','Temporal_Sup_R (aal)',4,Auditory,9,212,FPR
+80,43,-72,28,FPR,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Occipital_Mid_R (aal)',5,Default mode,9,213,FPR
+96,52,-59,36,FPR,'Parietal Lobe','Angular Gyrus','White Matter','undefined','Angular_R (aal)',5,Default mode,9,214,FPR
+97,23,33,48,FPR,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 8','Frontal_Sup_R (aal)',5,Default mode,9,215,FPR
+102,13,55,38,FPR,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 9','Frontal_Sup_R (aal)',5,Default mode,9,216,FPR
+112,-2,38,36,FPR,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 9','Frontal_Sup_Medial_L (aal)',5,Default mode,9,217,FPR
+119,65,-31,-9,FPR,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_R (aal)',5,Default mode,9,218,FPR
+130,47,-50,29,FPR,'Parietal Lobe','Supramarginal Gyrus','White Matter','undefined','Angular_R (aal)',5,Default mode,9,219,FPR
+139,49,35,-12,FPR,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Frontal_Inf_Orb_R (aal)',5,Default mode,9,220,FPR
+175,48,25,27,FPR,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Inf_Tri_R (aal)',8,Fronto-parietal Task Control,9,221,FPR
+179,58,-53,-14,FPR,'Temporal Lobe','Middle Temporal Gyrus','Gray Matter','brodmann area 37','Temporal_Inf_R (aal)',8,Fronto-parietal Task Control,9,222,FPR
+181,34,54,-13,FPR,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Mid_Orb_R (aal)',8,Fronto-parietal Task Control,9,223,FPR
+186,47,10,33,FPR,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Precentral_R (aal)',8,Fronto-parietal Task Control,9,224,FPR
+190,49,-42,45,FPR,'Parietal Lobe','Inferior Parietal Lobule','White Matter','undefined','Parietal_Inf_R (aal)',8,Fronto-parietal Task Control,9,225,FPR
+192,44,-53,47,FPR,'Parietal Lobe','Inferior Parietal Lobule','Gray Matter','brodmann area 40','Parietal_Inf_R (aal)',8,Fronto-parietal Task Control,9,226,FPR
+193,32,14,56,FPR,'Frontal Lobe','Superior Frontal Gyrus','White Matter','undefined','Frontal_Mid_R (aal)',8,Fronto-parietal Task Control,9,227,FPR
+194,37,-65,40,FPR,'Parietal Lobe','Inferior Parietal Lobule','White Matter','undefined','Angular_R (aal)',8,Fronto-parietal Task Control,9,228,FPR
+196,40,18,40,FPR,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Mid_R (aal)',8,Fronto-parietal Task Control,9,229,FPR
+199,33,-53,44,FPR,'Parietal Lobe','Inferior Parietal Lobule','White Matter','undefined','Angular_R (aal)',8,Fronto-parietal Task Control,9,230,FPR
+200,43,49,-2,FPR,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Mid_Orb_R (aal)',8,Fronto-parietal Task Control,9,231,FPR
+204,55,-45,37,FPR,'Parietal Lobe','Supramarginal Gyrus','White Matter','undefined','Parietal_Inf_R (aal)',9,Salience,9,232,FPR
+205,42,0,47,FPR,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 6','Precentral_R (aal)',9,Salience,9,233,FPR
+207,48,22,10,FPR,'Frontal Lobe','Inferior Frontal Gyrus','Gray Matter','brodmann area 45','Frontal_Inf_Tri_R (aal)',9,Salience,9,234,FPR
+235,54,-43,22,FPR,'Parietal Lobe','Inferior Parietal Lobule','White Matter','undefined','Temporal_Sup_R (aal)',11,Ventral attention,9,235,FPR
+241,53,33,1,FPR,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Frontal_Inf_Tri_R (aal)',11,Ventral attention,9,236,FPR
+251,10,-62,61,FPR,'Parietal Lobe','Precuneus','Gray Matter','brodmann area 7','Precuneus_R (aal)',12,Dorsal attention,9,237,FPR
+258,25,-58,60,FPR,'Parietal Lobe','Superior Parietal Lobule','Gray Matter','brodmann area 7','Parietal_Sup_R (aal)',12,Dorsal attention,9,238,FPR
+87,-39,-75,44,FPL,'undefined','undefined','undefined','undefined','Angular_L (aal)',5,Default mode,10,239,FPL
+98,-10,39,52,FPL,'Frontal Lobe','Superior Frontal Gyrus','White Matter','undefined','Frontal_Sup_Medial_L (aal)',5,Default mode,10,240,FPL
+99,-16,29,53,FPL,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 8','Frontal_Sup_L (aal)',5,Default mode,10,241,FPL
+100,-35,20,51,FPL,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 8','Frontal_Mid_L (aal)',5,Default mode,10,242,FPL
+103,-10,55,39,FPL,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 9','Frontal_Sup_L (aal)',5,Default mode,10,243,FPL
+120,-68,-41,-5,FPL,'undefined','Middle Temporal Gyrus','undefined','undefined','Temporal_Mid_L (aal)',5,Default mode,10,244,FPL
+131,-49,-42,1,FPL,'Temporal Lobe','Middle Temporal Gyrus','White Matter','undefined','Temporal_Mid_L (aal)',5,Default mode,10,245,FPL
+137,-46,31,-13,FPL,'Frontal Lobe','Inferior Frontal Gyrus','Gray Matter','brodmann area 47','Frontal_Inf_Orb_L (aal)',5,Default mode,10,246,FPL
+174,-44,2,46,FPL,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Precentral_L (aal)',8,Fronto-parietal Task Control,10,247,FPL
+176,-47,11,23,FPL,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Frontal_Inf_Tri_L (aal)',8,Fronto-parietal Task Control,10,248,FPL
+177,-53,-49,43,FPL,'Parietal Lobe','Inferior Parietal Lobule','White Matter','undefined','Parietal_Inf_L (aal)',8,Fronto-parietal Task Control,10,249,FPL
+178,-23,11,64,FPL,'Frontal Lobe','Superior Frontal Gyrus','undefined','undefined','Frontal_Mid_L (aal)',8,Fronto-parietal Task Control,10,250,FPL
+182,-21,41,-20,FPL,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 11','Frontal_Mid_Orb_L (aal)',14,Uncertain,10,251,FPL
+187,-41,6,33,FPL,'Frontal Lobe','Inferior Frontal Gyrus','White Matter','undefined','Precentral_L (aal)',8,Fronto-parietal Task Control,10,252,FPL
+188,-42,38,21,FPL,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 46','Frontal_Mid_L (aal)',8,Fronto-parietal Task Control,10,253,FPL
+191,-28,-58,48,FPL,'Parietal Lobe','Superior Parietal Lobule','White Matter','undefined','Parietal_Inf_L (aal)',8,Fronto-parietal Task Control,10,254,FPL
+195,-42,-55,45,FPL,'Parietal Lobe','Inferior Parietal Lobule','Gray Matter','brodmann area 40','Parietal_Inf_L (aal)',8,Fronto-parietal Task Control,10,255,FPL
+197,-34,55,4,FPL,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 10','Frontal_Mid_L (aal)',8,Fronto-parietal Task Control,10,256,FPL
+198,-42,45,-2,FPL,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Mid_Orb_L (aal)',8,Fronto-parietal Task Control,10,257,FPL
+201,-42,25,30,FPL,'Frontal Lobe','Middle Frontal Gyrus','White Matter','undefined','Frontal_Inf_Tri_L (aal)',8,Fronto-parietal Task Control,10,258,FPL
+202,-3,26,44,FPL,'Frontal Lobe','Medial Frontal Gyrus','Gray Matter','brodmann area 8','Frontal_Sup_Medial_L (aal)',8,Fronto-parietal Task Control,10,259,FPL
+220,-39,51,17,FPL,'Frontal Lobe','Superior Frontal Gyrus','Gray Matter','brodmann area 10','Frontal_Mid_L (aal)',9,Salience,10,260,FPL
+259,-33,-46,47,FPL,'Parietal Lobe','Sub-Gyral','White Matter','undefined','Parietal_Inf_L (aal)',12,Dorsal attention,10,261,FPL
+260,-27,-71,37,FPL,'Parietal Lobe','Precuneus','White Matter','undefined','Occipital_Mid_L (aal)',12,Dorsal attention,10,262,FPL
+261,-32,-1,54,FPL,'Frontal Lobe','Middle Frontal Gyrus','Gray Matter','brodmann area 6','Precentral_L (aal)',12,Dorsal attention,10,263,FPL
+263,-17,-59,64,FPL,'Parietal Lobe','Superior Parietal Lobule','Gray Matter','brodmann area 7','Parietal_Sup_L (aal)',12,Dorsal attention,10,264,FPL
