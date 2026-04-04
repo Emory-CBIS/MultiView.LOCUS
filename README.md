@@ -68,7 +68,7 @@ The structure of the package is as follows, and detailed descriptions of the fun
     -  `Locus_preprocess`:  Preprocessing of connectivity data.
     -  `joint_update_approx`: The  function of fitting Multi-View LOCUS.
     -  `joint_initial`: Initialization for parameters in our model. 
-## III. Detailed Descriptions of the Functions
+## III. Detailed Descriptions of the main Functions
 
 ### 1. Multi-View LOCUS function
 
