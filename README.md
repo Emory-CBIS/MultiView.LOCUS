@@ -151,7 +151,7 @@ calculate_bic(Y, model)
 ## IV. Simulation Studies using Brain Connectome Data.
 
 ### Self-Contained Reproducibility Report
-**Use [`Reproducibility.rmd`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main) to quickly replicate the figures for Simulations I–III. A knitted version is also available as [`Reproducibility.pdf`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main).** For a deeper dive, see the Simulation III example below.
+**Run [`Reproducibility.rmd`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main) to quickly replicate the figures for Simulations I–III using the data in example_data folder. A knitted version is also available as [`Reproducibility.pdf`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main).** For a deeper dive, see the Simulation III example below.
 
 ### A detailed example for Simulation III
 In this section, we provide an example in our Simulation scenario III to demonstrate the implementation of the package. We generated the example data **Y** based on  estimated lantent connectivity traits from real brain connectivity. 
