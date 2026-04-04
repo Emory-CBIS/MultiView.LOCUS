@@ -20,6 +20,10 @@ These are the files you will usually use directly:
   - `Data_x.rds`
   - `Data_y.rds`
 
+- **Power node system**
+- power264_sorted_node_information.csv 
+
+
 The info below is  about how we get the Simulation data above (optional)
 ---------------------------------------------------------------------------------------------------
 
