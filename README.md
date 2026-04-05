@@ -151,7 +151,7 @@ calculate_bic(Y, model)
 ## IV. Simulation Studies using Brain Connectome Data.
 
 ### Self-Contained Reproducibility Report
-**Run [`Reproducibility.rmd`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main/Reproducibility.rmd) to quickly replicate the figures for Simulations I–III using the data in example_data folder. A knitted version is also available as [`Reproducibility.pdf`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main/Reproducibility.rmd).** For a deeper dive, see the Simulation III example below.
+**Run [`Reproducibility.rmd`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main/Reproducibility.rmd) to quickly replicate the figures for Simulations I–III in our paper (Yang et al., 2026) using the data in the example_data folder. A knitted version is also available as [`Reproducibility.pdf`](https://github.com/Emory-CBIS/MultiView.LOCUS/tree/main/Reproducibility.rmd).** For a deeper dive, see the Simulation III example below.
 
 ### A detailed example for Simulation III
 In this section, we provide an example in our Simulation scenario III to demonstrate the implementation of the package. We generated the example data **Y** based on  estimated lantent connectivity traits from real brain connectivity. 
@@ -352,9 +352,9 @@ Example outputed components, the first second rows represent the view 1 and view
 
 ---
 
-### Citation
+### Reference and Citation
 If you use this software or the associated methods in your research, please cite:
 
-Yang, G., Wang, Y., Lukemire, J., & Guo, Y. **Investigating Neural Circuits Underlying Multi-View Brain Connectome using Multi-View LOCUS.** *Department of Biostatistics and Bioinformatics, Emory University.* (Unpublished manuscript 2026+).
+Yang, G., Wang, Y., Lukemire, J., & Guo, Y. (2026+), **Investigating Neural Circuits Underlying Multi-View Brain Connectome using Multi-View LOCUS.** 
 
 
