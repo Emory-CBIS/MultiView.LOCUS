@@ -21,6 +21,10 @@
 #' @param H_inv        List of whitening back-projection matrices.
 #' @param Iter         Current outer-loop iteration number (integer).
 #' @param cor_mutual   (Optional) pre-computed mutual correlations.
+#' @param sequential_specific Logical; if `TRUE`, update view-specific mixing
+#'                     vectors sequentially using quadratic programming with
+#'                     orthogonality constraints. If `FALSE` (the default),
+#'                     use the original projection-and-orthonormalization update.
 #'
 #' @return A `list` containing updated `A`, `S`, `S_sparse`,
 #'         `theta_common`, and `theta_spe`.
@@ -28,8 +32,13 @@
 #' @keywords internal
 #' @export
 
-joint_update_approx <- function(Y,A,theta_common, theta_spe, q,q_common ,psi, penalt = NULL,eigen_cor = 0.15,lambda_ch , gamma = 3,imput_method = "Previous",silent = FALSE,H_inv ,Iter,cor_mutual)
+joint_update_approx <- function(Y,A,theta_common, theta_spe, q,q_common ,psi, penalt = NULL,eigen_cor = 0.15,lambda_ch , gamma = 3,imput_method = "Previous",silent = FALSE,H_inv ,Iter,cor_mutual, sequential_specific = FALSE)
 {
+  if (!is.logical(sequential_specific) || length(sequential_specific) != 1L ||
+      is.na(sequential_specific)) {
+    stop("sequential_specific must be TRUE or FALSE.")
+  }
+
   # An extremely efficient approximation method with potentially higher performance.
   if(is.null(penalt))
   {
@@ -351,23 +360,76 @@ if (Iter){
       S_sparse[[j]][l,] =  S_sparse[[j]][l,]*ai
     }}}
 
-  #For specific components
-  for (j in 1:length(q)){
-  if (q[j]!=0){
-  P_new = diag(1,nrow = q_common+q[j]) - (A_new[[j]][,1:q_common])%*%solve(t(A_new[[j]][,1:q_common])%*%(A_new[[j]][,1:q_common]))%*%t(A_new[[j]][,1:q_common])
-  if (q[j] == 1){
-  A_specific = P_new %*% Y[[j]]%*%(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve(t(S[[j]][(q_common+1):nrow(S[[j]]),])%*%(S[[j]][(q_common+1):nrow(S[[j]]),]))
+  if (sequential_specific) {
+    # Optional update: treat view-specific columns in the same sequential way
+    # as common columns, but without an across-view synergy term.
+    for (j in seq_along(q)) {
+      if (q[j] > 0L) {
+        for (r in seq_len(q[j])) {
+          l = q_common + r
+
+          dvec = drop(S[[j]][l, ] %*% t(Y[[j]]))
+
+          if (l > 1L) {
+            A_previous = A_new[[j]][, seq_len(l - 1L), drop = FALSE]
+            qp_fit = quadprog::solve.QP(
+              Dmat = Dmat[[j]],
+              dvec = dvec,
+              Amat = A_previous,
+              bvec = rep(0, ncol(A_previous)),
+              meq = ncol(A_previous)
+            )
+            A_curr = qp_fit$solution
+          } else {
+            A_curr = solve(Dmat[[j]], dvec)
+          }
+
+          ai = sqrt(sum(A_curr^2))
+          if (!is.finite(ai) || ai <= sqrt(.Machine$double.eps)) {
+            stop(paste(
+              "Degenerate mixing-vector update for view", j,
+              "and component", l
+            ))
+          }
+
+          A_new[[j]][, l] = A_curr / ai
+          theta_spe_new[[j]][[r]]$lam_l =
+            theta_spe_new[[j]][[r]]$lam_l * ai
+          S[[j]][l, ] = S[[j]][l, ] * ai
+          S_sparse[[j]][l, ] = S_sparse[[j]][l, ] * ai
+        }
+
+        orthogonality_error = max(abs(
+          crossprod(A_new[[j]]) - diag(ncol(A_new[[j]]))
+        ))
+        if (orthogonality_error > 1e-8) {
+          warning(paste(
+            "Orthogonality error for view", j, "is",
+            signif(orthogonality_error, 4)
+          ))
+        }
+      }
+    }
+  } else {
+    # Original/default update: project all view-specific columns away from the
+    # common-source space and orthonormalize them jointly.
+    for (j in 1:length(q)){
+      if (q[j]!=0){
+        P_new = diag(1,nrow = q_common+q[j]) - (A_new[[j]][,1:q_common])%*%solve(t(A_new[[j]][,1:q_common])%*%(A_new[[j]][,1:q_common]))%*%t(A_new[[j]][,1:q_common])
+        if (q[j] == 1){
+          A_specific = P_new %*% Y[[j]]%*%(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve(t(S[[j]][(q_common+1):nrow(S[[j]]),])%*%(S[[j]][(q_common+1):nrow(S[[j]]),]))
+        }
+        else{A_specific = P_new  %*% Y[[j]] %*%t(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve((S[[j]][(q_common+1):nrow(S[[j]]),])%*%t(S[[j]][(q_common+1):nrow(S[[j]]),])) }
+        if (q[j] == 1){
+          norm = sqrt(sum(A_specific^2))
+          A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)
+        }else{
+          norm = sqrt(apply(A_specific^2,2,sum))
+          A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)}
+        S[[j]][(q_common+1):nrow(S[[j]]),] = S[[j]][(q_common+1):nrow(S[[j]]),]*norm
+        S_sparse[[j]][(q_common+1):nrow(S[[j]]),] = S_sparse[[j]][(q_common+1):nrow(S[[j]]),]*norm
+      }}
   }
-  else{A_specific = P_new  %*% Y[[j]] %*%t(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve((S[[j]][(q_common+1):nrow(S[[j]]),])%*%t(S[[j]][(q_common+1):nrow(S[[j]]),])) }
-  if (q[j] == 1){
-    norm = sqrt(sum(A_specific^2))
-    A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)
-  }else{
-  norm = sqrt(apply(A_specific^2,2,sum))
-  A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)}
-  S[[j]][(q_common+1):nrow(S[[j]]),] = S[[j]][(q_common+1):nrow(S[[j]]),]*norm
-  S_sparse[[j]][(q_common+1):nrow(S[[j]]),] = S_sparse[[j]][(q_common+1):nrow(S[[j]]),]*norm
-  }}
 
   # Save m_l, X_l into theta2_new:
   for (j in 1:length(q)){
