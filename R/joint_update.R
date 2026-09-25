@@ -1,3 +1,311 @@
+.mv_phi_for_view <- function(lambda_ch, k, n_views) {
+  if (length(lambda_ch) == 1L) {
+    return(as.numeric(lambda_ch))
+  }
+  if (length(lambda_ch) != n_views) {
+    stop("lambda_ch must have length 1 or the number of views.")
+  }
+  as.numeric(lambda_ch[k])
+}
+
+.mv_threshold_signal <- function(y, phi, penalt, gamma) {
+  y <- drop(y)
+  if (is.null(penalt) || identical(penalt, "NULL")) {
+    return(y)
+  }
+
+  threshold <- phi / 2
+  if (penalt == "L1") {
+    return(sign(y) * pmax(abs(y) - threshold, 0))
+  }
+  if (penalt == "Hardthreshold") {
+    return(y * (abs(y) >= threshold))
+  }
+  if (penalt == "SCAD") {
+    return(SCAD_func(y, lambda_ch = threshold, gamma = gamma))
+  }
+  stop("No Penalty available!")
+}
+
+.mv_solve_normal_equations <- function(design, response, label) {
+  gram <- crossprod(design)
+  rhs <- crossprod(design, response)
+  solution <- tryCatch(
+    solve(gram, rhs),
+    error = function(e) MASS::ginv(gram) %*% rhs
+  )
+  solution <- drop(solution)
+  if (any(!is.finite(solution))) {
+    stop(paste("Non-finite solution while updating", label))
+  }
+  solution
+}
+
+.mv_source_design <- function(X) {
+  rank <- ncol(X)
+  p <- nrow(X) * (nrow(X) - 1L) / 2L
+  Z <- vapply(
+    seq_len(rank),
+    function(r) Ltrans(tcrossprod(X[, r]), FALSE),
+    numeric(p)
+  )
+  matrix(Z, nrow = p, ncol = rank)
+}
+
+.mv_algorithm_s1_update <- function(Y, A, theta_common, theta_spe, q,
+                                    q_common, psi, penalt, lambda_ch, gamma,
+                                    H_inv) {
+  n_views <- length(Y)
+  p <- ncol(Y[[1]])
+  V <- as.integer(round((sqrt(1 + 8 * p) + 1) / 2))
+  if (V * (V - 1) / 2 != p) {
+    stop("The number of connectivity edges is inconsistent with V(V-1)/2.")
+  }
+
+  edge_pairs <- which(
+    upper.tri(matrix(FALSE, V, V), diag = FALSE),
+    arr.ind = TRUE
+  )
+  edge_index <- lapply(
+    seq_len(V),
+    function(v) which(edge_pairs[, 1] == v | edge_pairs[, 2] == v)
+  )
+
+  theta_new <- theta_common
+  theta_spe_new <- theta_spe
+
+  ## Step 1: node-rotation updates of the latent coordinates.
+  if (q_common > 0L) {
+    for (l in seq_len(q_common)) {
+      X <- t(theta_common[[1]][[l]]$J_l)
+      rank <- ncol(X)
+
+      for (v in seq_len(V)) {
+        gram_sum <- matrix(0, rank, rank)
+        rhs_sum <- numeric(rank)
+
+        for (k in seq_len(n_views)) {
+          d_old <- theta_common[[k]][[l]]$lam_l
+          W <- X[-v, , drop = FALSE] %*%
+            diag(d_old, nrow = length(d_old), ncol = length(d_old))
+          target <- drop(
+            t(Y[[k]][, edge_index[[v]], drop = FALSE]) %*% A[[k]][, l]
+          )
+          phi_k <- .mv_phi_for_view(lambda_ch, k, n_views)
+          b_hat <- .mv_threshold_signal(target, phi_k, penalt, gamma)
+          gram_sum <- gram_sum + crossprod(W)
+          rhs_sum <- rhs_sum + drop(crossprod(W, b_hat))
+        }
+
+        x_update <- tryCatch(
+          solve(gram_sum, rhs_sum),
+          error = function(e) MASS::ginv(gram_sum) %*% rhs_sum
+        )
+        X[v, ] <- drop(x_update)
+      }
+
+      for (k in seq_len(n_views)) {
+        theta_new[[k]][[l]]$J_l <- t(X)
+      }
+    }
+  }
+
+  for (k in seq_len(n_views)) {
+    if (q[k] > 0L) {
+      for (r in seq_len(q[k])) {
+        l <- q_common + r
+        X <- t(theta_spe[[k]][[r]]$J_l)
+        d_old <- theta_spe[[k]][[r]]$lam_l
+
+        for (v in seq_len(V)) {
+          W <- X[-v, , drop = FALSE] %*%
+            diag(d_old, nrow = length(d_old), ncol = length(d_old))
+          target <- drop(
+            t(Y[[k]][, edge_index[[v]], drop = FALSE]) %*% A[[k]][, l]
+          )
+          phi_k <- .mv_phi_for_view(lambda_ch, k, n_views)
+          b_hat <- .mv_threshold_signal(target, phi_k, penalt, gamma)
+          X[v, ] <- .mv_solve_normal_equations(
+            W, b_hat,
+            paste("X for view", k, "and component", l)
+          )
+        }
+
+        theta_spe_new[[k]][[r]]$J_l <- t(X)
+      }
+    }
+  }
+
+  ## Step 2: update each diagonal D through thresholding and projection.
+  for (k in seq_len(n_views)) {
+    phi_k <- .mv_phi_for_view(lambda_ch, k, n_views)
+
+    if (q_common > 0L) {
+      for (l in seq_len(q_common)) {
+        X <- t(theta_new[[k]][[l]]$J_l)
+        Z <- .mv_source_design(X)
+        target <- drop(t(Y[[k]]) %*% A[[k]][, l])
+        b_hat <- .mv_threshold_signal(target, phi_k, penalt, gamma)
+        theta_new[[k]][[l]]$lam_l <- .mv_solve_normal_equations(
+          Z, b_hat,
+          paste("D for view", k, "and common component", l)
+        )
+      }
+    }
+
+    if (q[k] > 0L) {
+      for (r in seq_len(q[k])) {
+        l <- q_common + r
+        X <- t(theta_spe_new[[k]][[r]]$J_l)
+        Z <- .mv_source_design(X)
+        target <- drop(t(Y[[k]]) %*% A[[k]][, l])
+        b_hat <- .mv_threshold_signal(target, phi_k, penalt, gamma)
+        theta_spe_new[[k]][[r]]$lam_l <- .mv_solve_normal_equations(
+          Z, b_hat,
+          paste("D for view", k, "and view-specific component", l)
+        )
+      }
+    }
+  }
+
+  ## Identifiability rescaling: ||x_r||=1 and d_r <- d_r ||x_r||^2.
+  if (q_common > 0L) {
+    for (l in seq_len(q_common)) {
+      X <- t(theta_new[[1]][[l]]$J_l)
+      x_norm <- sqrt(colSums(X^2))
+      if (any(!is.finite(x_norm)) ||
+          any(x_norm <= sqrt(.Machine$double.eps))) {
+        stop(paste("Degenerate X column for common component", l))
+      }
+      X <- sweep(X, 2L, x_norm, "/")
+      for (k in seq_len(n_views)) {
+        theta_new[[k]][[l]]$J_l <- t(X)
+        theta_new[[k]][[l]]$lam_l <-
+          theta_new[[k]][[l]]$lam_l * x_norm^2
+      }
+    }
+  }
+
+  for (k in seq_len(n_views)) {
+    if (q[k] > 0L) {
+      for (r in seq_len(q[k])) {
+        X <- t(theta_spe_new[[k]][[r]]$J_l)
+        x_norm <- sqrt(colSums(X^2))
+        if (any(!is.finite(x_norm)) ||
+            any(x_norm <= sqrt(.Machine$double.eps))) {
+          stop(paste(
+            "Degenerate X column for view", k,
+            "and view-specific component", r
+          ))
+        }
+        theta_spe_new[[k]][[r]]$J_l <-
+          t(sweep(X, 2L, x_norm, "/"))
+        theta_spe_new[[k]][[r]]$lam_l <-
+          theta_spe_new[[k]][[r]]$lam_l * x_norm^2
+      }
+    }
+  }
+
+  ## Reconstruct S from the updated and rescaled X and D.
+  S <- vector("list", n_views)
+  S_sparse <- vector("list", n_views)
+  for (k in seq_len(n_views)) {
+    q_total <- q_common + q[k]
+    S[[k]] <- matrix(0, nrow = q_total, ncol = p)
+
+    if (q_common > 0L) {
+      for (l in seq_len(q_common)) {
+        X <- t(theta_new[[k]][[l]]$J_l)
+        Z <- .mv_source_design(X)
+        S[[k]][l, ] <- drop(Z %*% theta_new[[k]][[l]]$lam_l)
+      }
+    }
+    if (q[k] > 0L) {
+      for (r in seq_len(q[k])) {
+        l <- q_common + r
+        X <- t(theta_spe_new[[k]][[r]]$J_l)
+        Z <- .mv_source_design(X)
+        S[[k]][l, ] <- drop(Z %*% theta_spe_new[[k]][[r]]$lam_l)
+      }
+    }
+
+    phi_k <- .mv_phi_for_view(lambda_ch, k, n_views)
+    S_sparse[[k]] <- S[[k]] * (abs(S[[k]]) >= 3.5 * phi_k)
+  }
+
+  ## Step 3: sequential constrained update of every column of A-tilde.
+  A_new <- vector("list", n_views)
+  for (k in seq_len(n_views)) {
+    q_total <- q_common + q[k]
+    A_new[[k]] <- matrix(0, q_total, q_total)
+    Dmat <- Y[[k]] %*% t(Y[[k]])
+
+    for (l in seq_len(q_total)) {
+      dvec <- drop(S[[k]][l, ] %*% t(Y[[k]]))
+      if (l <= q_common) {
+        for (k_prime in setdiff(seq_len(n_views), k)) {
+          dvec <- dvec + (psi / 2) * drop(
+            t(A[[k_prime]][, l]) %*%
+              t(H_inv[[k_prime]]) %*% H_inv[[k]]
+          )
+        }
+      }
+
+      if (l > 1L) {
+        A_previous <- A_new[[k]][, seq_len(l - 1L), drop = FALSE]
+        qp_fit <- quadprog::solve.QP(
+          Dmat = Dmat,
+          dvec = dvec,
+          Amat = A_previous,
+          bvec = rep(0, ncol(A_previous)),
+          meq = ncol(A_previous)
+        )
+        a_update <- qp_fit$solution
+      } else {
+        a_update <- solve(Dmat, dvec)
+      }
+
+      a_norm <- sqrt(sum(a_update^2))
+      if (!is.finite(a_norm) || a_norm <= sqrt(.Machine$double.eps)) {
+        stop(paste(
+          "Degenerate mixing-vector update for view", k,
+          "and component", l
+        ))
+      }
+      A_new[[k]][, l] <- a_update / a_norm
+    }
+
+    orthogonality_error <- max(abs(
+      crossprod(A_new[[k]]) - diag(q_total)
+    ))
+    if (orthogonality_error > 1e-8) {
+      warning(paste(
+        "Orthogonality error for view", k, "is",
+        signif(orthogonality_error, 4)
+      ))
+    }
+
+    if (q_common > 0L) {
+      for (l in seq_len(q_common)) {
+        theta_new[[k]][[l]]$M_l <- A_new[[k]][, l]
+      }
+    }
+    if (q[k] > 0L) {
+      for (r in seq_len(q[k])) {
+        theta_spe_new[[k]][[r]]$M_l <- A_new[[k]][, q_common + r]
+      }
+    }
+  }
+
+  list(
+    A = A_new,
+    S = S,
+    S_sparse = S_sparse,
+    theta_spe = theta_spe_new,
+    theta_common = theta_new
+  )
+}
+
 #' One Iteration Update (Approximate) for Joint Decomposition
 #'
 #' Updates the parameter lists returned by [joint_initial()] using an
@@ -21,10 +329,13 @@
 #' @param H_inv        List of whitening back-projection matrices.
 #' @param Iter         Current outer-loop iteration number (integer).
 #' @param cor_mutual   (Optional) pre-computed mutual correlations.
-#' @param sequential_specific Logical; if `TRUE`, update view-specific mixing
-#'                     vectors sequentially using quadratic programming with
-#'                     orthogonality constraints. If `FALSE` (the default),
-#'                     use the original projection-and-orthonormalization update.
+#' @param sequential_specific Logical; if `TRUE`, use the full Algorithm S1
+#'                     updates: node-rotation updates of `X`, threshold-and-
+#'                     projection updates of `D`, the stated identifiability
+#'                     rescaling, reconstruction of `S`, and sequential
+#'                     constrained updates of the reduced-space mixing matrix.
+#'                     If `FALSE` (the default), use the original eigen-based
+#'                     package updates.
 #'
 #' @return A `list` containing updated `A`, `S`, `S_sparse`,
 #'         `theta_common`, and `theta_spe`.
@@ -37,6 +348,22 @@ joint_update_approx <- function(Y,A,theta_common, theta_spe, q,q_common ,psi, pe
   if (!is.logical(sequential_specific) || length(sequential_specific) != 1L ||
       is.na(sequential_specific)) {
     stop("sequential_specific must be TRUE or FALSE.")
+  }
+
+  if (sequential_specific) {
+    return(.mv_algorithm_s1_update(
+      Y = Y,
+      A = A,
+      theta_common = theta_common,
+      theta_spe = theta_spe,
+      q = q,
+      q_common = q_common,
+      psi = psi,
+      penalt = penalt,
+      lambda_ch = lambda_ch,
+      gamma = gamma,
+      H_inv = H_inv
+    ))
   }
 
   # An extremely efficient approximation method with potentially higher performance.
@@ -237,6 +564,7 @@ if(q[j] !=0){
   }
   }
 }
+
   #############Y specific component approximately by eigen decomposition
   # Update A,B
   ## Ensemble S for all modality
@@ -360,76 +688,23 @@ if (Iter){
       S_sparse[[j]][l,] =  S_sparse[[j]][l,]*ai
     }}}
 
-  if (sequential_specific) {
-    # Optional update: treat view-specific columns in the same sequential way
-    # as common columns, but without an across-view synergy term.
-    for (j in seq_along(q)) {
-      if (q[j] > 0L) {
-        for (r in seq_len(q[j])) {
-          l = q_common + r
-
-          dvec = drop(S[[j]][l, ] %*% t(Y[[j]]))
-
-          if (l > 1L) {
-            A_previous = A_new[[j]][, seq_len(l - 1L), drop = FALSE]
-            qp_fit = quadprog::solve.QP(
-              Dmat = Dmat[[j]],
-              dvec = dvec,
-              Amat = A_previous,
-              bvec = rep(0, ncol(A_previous)),
-              meq = ncol(A_previous)
-            )
-            A_curr = qp_fit$solution
-          } else {
-            A_curr = solve(Dmat[[j]], dvec)
-          }
-
-          ai = sqrt(sum(A_curr^2))
-          if (!is.finite(ai) || ai <= sqrt(.Machine$double.eps)) {
-            stop(paste(
-              "Degenerate mixing-vector update for view", j,
-              "and component", l
-            ))
-          }
-
-          A_new[[j]][, l] = A_curr / ai
-          theta_spe_new[[j]][[r]]$lam_l =
-            theta_spe_new[[j]][[r]]$lam_l * ai
-          S[[j]][l, ] = S[[j]][l, ] * ai
-          S_sparse[[j]][l, ] = S_sparse[[j]][l, ] * ai
-        }
-
-        orthogonality_error = max(abs(
-          crossprod(A_new[[j]]) - diag(ncol(A_new[[j]]))
-        ))
-        if (orthogonality_error > 1e-8) {
-          warning(paste(
-            "Orthogonality error for view", j, "is",
-            signif(orthogonality_error, 4)
-          ))
-        }
-      }
-    }
-  } else {
-    # Original/default update: project all view-specific columns away from the
-    # common-source space and orthonormalize them jointly.
-    for (j in 1:length(q)){
-      if (q[j]!=0){
-        P_new = diag(1,nrow = q_common+q[j]) - (A_new[[j]][,1:q_common])%*%solve(t(A_new[[j]][,1:q_common])%*%(A_new[[j]][,1:q_common]))%*%t(A_new[[j]][,1:q_common])
-        if (q[j] == 1){
-          A_specific = P_new %*% Y[[j]]%*%(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve(t(S[[j]][(q_common+1):nrow(S[[j]]),])%*%(S[[j]][(q_common+1):nrow(S[[j]]),]))
-        }
-        else{A_specific = P_new  %*% Y[[j]] %*%t(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve((S[[j]][(q_common+1):nrow(S[[j]]),])%*%t(S[[j]][(q_common+1):nrow(S[[j]]),])) }
-        if (q[j] == 1){
-          norm = sqrt(sum(A_specific^2))
-          A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)
-        }else{
-          norm = sqrt(apply(A_specific^2,2,sum))
-          A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)}
-        S[[j]][(q_common+1):nrow(S[[j]]),] = S[[j]][(q_common+1):nrow(S[[j]]),]*norm
-        S_sparse[[j]][(q_common+1):nrow(S[[j]]),] = S_sparse[[j]][(q_common+1):nrow(S[[j]]),]*norm
-      }}
+  #For specific components
+  for (j in 1:length(q)){
+  if (q[j]!=0){
+  P_new = diag(1,nrow = q_common+q[j]) - (A_new[[j]][,1:q_common])%*%solve(t(A_new[[j]][,1:q_common])%*%(A_new[[j]][,1:q_common]))%*%t(A_new[[j]][,1:q_common])
+  if (q[j] == 1){
+  A_specific = P_new %*% Y[[j]]%*%(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve(t(S[[j]][(q_common+1):nrow(S[[j]]),])%*%(S[[j]][(q_common+1):nrow(S[[j]]),]))
   }
+  else{A_specific = P_new  %*% Y[[j]] %*%t(S[[j]][(q_common+1):nrow(S[[j]]),]) %*% solve((S[[j]][(q_common+1):nrow(S[[j]]),])%*%t(S[[j]][(q_common+1):nrow(S[[j]]),])) }
+  if (q[j] == 1){
+    norm = sqrt(sum(A_specific^2))
+    A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)
+  }else{
+  norm = sqrt(apply(A_specific^2,2,sum))
+  A_new[[j]][,(q_common+1):nrow(A_new[[j]])] = far::orthonormalization(A_specific,basis = F)}
+  S[[j]][(q_common+1):nrow(S[[j]]),] = S[[j]][(q_common+1):nrow(S[[j]]),]*norm
+  S_sparse[[j]][(q_common+1):nrow(S[[j]]),] = S_sparse[[j]][(q_common+1):nrow(S[[j]]),]*norm
+  }}
 
   # Save m_l, X_l into theta2_new:
   for (j in 1:length(q)){
